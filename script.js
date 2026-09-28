@@ -25,7 +25,7 @@ function crearInterfaz() {
 }
 
 
-function insertarImagenes(){
+function insertarImagenes(){ 
 
 };
 
