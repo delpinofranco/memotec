@@ -19,8 +19,15 @@ const imagenes = [
 
 const app = document.getElementById("app");
 
+let jugadorActual = 1;
+
+let puntosJugador1 = 0;
+let puntosJugador2 = 0;
+
+
 let primeraCarta = null;
 let segundaCarta = null;
+imagenes.sort(() => Math.random() - 0.5);
 
 function crearInterfaz() {
 
@@ -84,29 +91,60 @@ tablero.addEventListener("click", (e) => {
 
 function mostrarCartas () {
 
+
+
 };
 
 
-function elegirCartas () {
 
-};
 
-function compararCartas () {
+function compararCartas() {
+  const img1 = primeraCarta.querySelector("img").src;
+  const img2 = segundaCarta.querySelector("img").src;
 
-};
+  if (img1 === img2) {
+    retirarCartas();
+    asignarPuntos();
+    
+  } 
+  else{
+    alternarJugador();
+  }
+
+  primeraCarta = null;
+  segundaCarta = null;
+}
+
+
 
 function retirarCartas () {
+    primeraCarta.style.visibility = "hidden";
+  segundaCarta.style.visibility = "hidden";
+  
 
 };
 
-function asignarPuntos () {
+function asignarPuntos() {
 
-};
+    if (jugadorActual === 1) {
+        puntosJugador1++;
+    }
+    else {
+        puntosJugador2++;
+    }
 
-function verificarCantidadDeCartas() {
+}
 
-};
 
 function alternarJugador(){
+
+if(jugadorActual === 1){
+    jugadorActual = 2;
+
+}
+else{
+    jugadorActual = 1;
+}
+
 
 };
