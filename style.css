@@ -1,5 +1,40 @@
 body{
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: antiquewhite;
+    height: 100vh;
 
+}
+
+
+
+.tablero{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem;
+    height: 800px;
+    width: 1200px;
+    background-color: aqua;
+}
+
+.cartas{
+   background-color: antiquewhite;
+    height: 300px;
+    width: 200px;
+   
+
+}
+
+.cartas img {
+    display: none;
+    width: 200px;
+    height: 200px;
+}
+
+.cartas.mostrar img {
+    display: block;
 }

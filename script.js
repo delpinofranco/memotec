@@ -23,8 +23,8 @@ let jugadorActual = 1;
 
 let puntosJugador1 = 0;
 let puntosJugador2 = 0;
-
-
+let carta;
+let tablero ;
 let primeraCarta = null;
 let segundaCarta = null;
 imagenes.sort(() => Math.random() - 0.5);
@@ -32,27 +32,27 @@ imagenes.sort(() => Math.random() - 0.5);
 function crearInterfaz() {
 
 
-    const tablero = document.createElement("tablero");
-
+   
+    tablero = document.createElement("div");
     tablero.classList.add("tablero");
+    app.appendChild(tablero);
 
-
-    const botonReiniciar = document.createElement("botonReiniciar");
+    const botonReiniciar = document.createElement("div");
 
     const informacionDeJuego = document.createElement("informacion");
 
     informacionDeJuego.classList.add("informacion");
 
-    const jugador1 = document.createElement("jugador1");
+    const jugador1 = document.createElement("div");
 
     const jugador2 = document.createElement("jugador2");
-
+    insertarImagenes();
 
 function insertarImagenes(){ 
 
 imagenes.forEach(imagen => {
 
-    const carta = document.createElement("cartas");
+    carta = document.createElement("div");
 
     carta.classList.add("cartas");
 
@@ -71,20 +71,7 @@ imagenes.forEach(imagen => {
 }
 
 
-tablero.addEventListener("click", (e) => {
 
-  const cartaClickeada = e.target.closest(".carta");
-
-  if (!cartaClickeada) 
-    return;
-
-  if (primeraCarta === null) {
-    primeraCarta = cartaClickeada;
-  } else if (segundaCarta === nul && cartaClickeada !== primeraCarta) {
-    segundaCarta = cartaClickeada;
-    compararCartas();
-  }
-});
 
 
 
@@ -148,3 +135,31 @@ else{
 
 
 };
+
+
+
+
+
+
+
+crearInterfaz();
+
+
+
+tablero.addEventListener("click", (e) => {
+
+  const cartaClickeada = e.target.closest(".cartas");
+
+  if (!cartaClickeada) 
+    return;
+
+  if (primeraCarta === null) {
+   
+    primeraCarta = cartaClickeada;
+    primeraCarta.classList.toggle("mostrar");
+  } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
+    segundaCarta = cartaClickeada;
+    segundaCarta.classList.toggle("mostrar");
+    // compararCartas();
+  }
+});
