@@ -2,7 +2,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: antiquewhite;
+    background-color: rgb(124, 123, 122);
     height: 100vh;
 
 }
@@ -16,14 +16,17 @@ body{
     gap: 2rem;
     flex-wrap: wrap;
     padding: 2rem;
-    height: 800px;
+    height: 900px;
     width: 1200px;
     background-color: aqua;
 }
 
 .cartas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
    background-color: antiquewhite;
-    height: 300px;
+    height: 200px;
     width: 200px;
    
 
@@ -31,8 +34,8 @@ body{
 
 .cartas img {
     display: none;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 
 .cartas.mostrar img {

@@ -27,7 +27,9 @@ let carta;
 let tablero ;
 let primeraCarta = null;
 let segundaCarta = null;
-imagenes.sort(() => Math.random() - 0.5);
+let contador= 1;
+
+
 
 function crearInterfaz() {
 
@@ -50,7 +52,10 @@ function crearInterfaz() {
 
 function insertarImagenes(){ 
 
-imagenes.forEach(imagen => {
+while (contador <= 2) {
+  contador += 1;
+  imagenes.sort(() => Math.random() - 0.5);
+  imagenes.forEach(imagen => {
 
     carta = document.createElement("div");
 
@@ -65,6 +70,10 @@ imagenes.forEach(imagen => {
     tablero.appendChild(carta);
     
 });
+  
+}
+
+
 
 };
 
@@ -115,6 +124,7 @@ function asignarPuntos() {
 
     if (jugadorActual === 1) {
         puntosJugador1++;
+        console.log("puntos para el 1")
     }
     else {
         puntosJugador2++;
@@ -138,13 +148,7 @@ else{
 
 
 
-
-
-
-
 crearInterfaz();
-
-
 
 tablero.addEventListener("click", (e) => {
 
@@ -154,12 +158,11 @@ tablero.addEventListener("click", (e) => {
     return;
 
   if (primeraCarta === null) {
-   
     primeraCarta = cartaClickeada;
     primeraCarta.classList.toggle("mostrar");
   } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
     segundaCarta = cartaClickeada;
     segundaCarta.classList.toggle("mostrar");
-    // compararCartas();
+    compararCartas();
   }
 });
