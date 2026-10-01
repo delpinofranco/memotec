@@ -11,6 +11,7 @@ body{
 
 .tablero{
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     gap: 2rem;
@@ -20,6 +21,15 @@ body{
     width: 1200px;
     background-color: aqua;
 }
+
+.contenedor-marcador {
+    display: flex;
+    justify-content: space-around;
+    height: 3rem;
+    background-color: rgb(176, 176, 187);
+}
+
+
 
 .cartas{
     display: flex;

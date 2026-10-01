@@ -24,74 +24,111 @@ let jugadorActual = 1;
 let puntosJugador1 = 0;
 let puntosJugador2 = 0;
 let carta;
-let tablero ;
+let tablero;
 let primeraCarta = null;
 let segundaCarta = null;
-let contador= 1;
-
+let contador = 1;
+let jugador1;
+let jugador2;
 
 
 function crearInterfaz() {
 
 
-   
-    tablero = document.createElement("div");
-    tablero.classList.add("tablero");
-    app.appendChild(tablero);
+  tablero = document.createElement("div");
+  tablero.classList.add("tablero");
 
-    const botonReiniciar = document.createElement("div");
 
-    const informacionDeJuego = document.createElement("informacion");
+  const botonReiniciar = document.createElement("div");
 
-    informacionDeJuego.classList.add("informacion");
+  const informacionDeJuego = document.createElement("informacion");
 
-    const jugador1 = document.createElement("div");
+  informacionDeJuego.classList.add("informacion");
 
-    const jugador2 = document.createElement("jugador2");
-    insertarImagenes();
 
-function insertarImagenes(){ 
+  let contenedorMarcador1 = document.createElement("div");
+  contenedorMarcador1.classList.add("score");
 
-while (contador <= 2) {
-  contador += 1;
-  imagenes.sort(() => Math.random() - 0.5);
-  imagenes.forEach(imagen => {
+  let contenedorMarcador2 =  document.createElement("div");
+  contenedorMarcador2.classList.add("score");
 
-    carta = document.createElement("div");
 
-    carta.classList.add("cartas");
 
-    const img = document.createElement("img");
 
-    img.src = imagen;
 
-    carta.appendChild(img);
+const jugador1 = crearLabel("Jugador 1:");
+const jugador2 = crearLabel("Jugador 2:");
 
-    tablero.appendChild(carta);
-    
-});
+
+  const marcador = document.createElement("div");
+  marcador.classList.add("contenedor-marcador")
+
+  const puntos1 = document.createElement("span");
+ puntos1.textContent = " 0";
+
+ const puntos2 = document.createElement("span");
+ puntos2.textContent = " 0";
+
+
+  insertarImagenes();
+  app.appendChild(marcador);
   
+  app.appendChild(tablero);
+  
+  marcador.appendChild(contenedorMarcador1);
+  marcador.appendChild(contenedorMarcador2);
+  contenedorMarcador1.appendChild(jugador1);
+  contenedorMarcador1.appendChild(puntos1);
+  contenedorMarcador2.appendChild(jugador2);
+  contenedorMarcador2.appendChild(puntos2);
+
+
+
+  function insertarImagenes() {
+
+    while (contador <= 2) {
+      contador += 1;
+      imagenes.sort(() => Math.random() - 0.5);
+      imagenes.forEach(imagen => {
+
+        carta = document.createElement("div");
+
+        carta.classList.add("cartas");
+
+        const img = document.createElement("img");
+
+        img.src = imagen;
+
+        carta.appendChild(img);
+
+        tablero.appendChild(carta);
+
+      });
+
+    }
+
+
+
+  };
+
 }
+
+
+function crearLabel(textContent) {
+
+    const label = document.createElement("label");
+
+    label.textContent = textContent;
+
+    return label;
+}
+
+
+function mostrarCartas() {
 
 
 
 };
-
-}
-
-
-
-
-
-
-
-function mostrarCartas () {
-
-
-
-};
-
-
 
 
 function compararCartas() {
@@ -101,9 +138,9 @@ function compararCartas() {
   if (img1 === img2) {
     retirarCartas();
     asignarPuntos();
-    
-  } 
-  else{
+
+  }
+  else {
     alternarJugador();
   }
 
@@ -112,36 +149,35 @@ function compararCartas() {
 }
 
 
-
-function retirarCartas () {
-    primeraCarta.style.visibility = "hidden";
+function retirarCartas() {
+  primeraCarta.style.visibility = "hidden";
   segundaCarta.style.visibility = "hidden";
-  
+
 
 };
 
 function asignarPuntos() {
 
-    if (jugadorActual === 1) {
-        puntosJugador1++;
-        console.log("puntos para el 1")
-    }
-    else {
-        puntosJugador2++;
-    }
+  if (jugadorActual === 1) {
+    puntosJugador1++;
+    console.log("puntos para el 1")
+  }
+  else {
+    puntosJugador2++;
+  }
 
 }
 
 
-function alternarJugador(){
+function alternarJugador() {
 
-if(jugadorActual === 1){
+  if (jugadorActual === 1) {
     jugadorActual = 2;
 
-}
-else{
+  }
+  else {
     jugadorActual = 1;
-}
+  }
 
 
 };
@@ -154,7 +190,7 @@ tablero.addEventListener("click", (e) => {
 
   const cartaClickeada = e.target.closest(".cartas");
 
-  if (!cartaClickeada) 
+  if (!cartaClickeada)
     return;
 
   if (primeraCarta === null) {
