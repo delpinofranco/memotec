@@ -39,25 +39,20 @@ function crearInterfaz() {
   tablero.classList.add("tablero");
 
 
-  const botonReiniciar = document.createElement("div");
+  const botonReiniciar = crearContenedor("btn-reiniciar");
 
-  const informacionDeJuego = document.createElement("informacion");
+ 
 
-  informacionDeJuego.classList.add("informacion");
+let contenedorMarcador1 = crearContenedor("score");
 
-
-  let contenedorMarcador1 = document.createElement("div");
-  contenedorMarcador1.classList.add("score");
-
-  let contenedorMarcador2 =  document.createElement("div");
-  contenedorMarcador2.classList.add("score");
-
-
-
-
+let contenedorMarcador2 =  crearContenedor("score");
+  
 
 const jugador1 = crearLabel("Jugador 1:");
 const jugador2 = crearLabel("Jugador 2:");
+
+
+
 
 
   const marcador = document.createElement("div");
@@ -83,6 +78,21 @@ const jugador2 = crearLabel("Jugador 2:");
   contenedorMarcador2.appendChild(puntos2);
 
 
+
+
+
+
+
+
+
+
+  function crearContenedor(clase) {
+    const contenedor = document.createElement("div");
+
+    contenedor.classList.add(clase);
+
+    return contenedor;
+}
 
   function insertarImagenes() {
 
@@ -132,15 +142,23 @@ function mostrarCartas() {
 
 
 function compararCartas() {
-  const img1 = primeraCarta.querySelector("img").src;
-  const img2 = segundaCarta.querySelector("img").src;
+  const img1 = primeraCarta.querySelector("img");
+  const img2 = segundaCarta.querySelector("img");
 
-  if (img1 === img2) {
+  if (img1.src === img2.src) {
     retirarCartas();
     asignarPuntos();
 
   }
   else {
+    setTimeout(() => {
+
+    img1.style.display = "none";
+    img2.style.display = "none";
+
+    alternarJugador();
+
+}, 4000);
     alternarJugador();
   }
 
