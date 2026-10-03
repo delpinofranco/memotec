@@ -32,6 +32,9 @@ let puntos1 = 0;
 let puntos2 = 0;
 let jugador1;
 let jugador2;
+let alternar = false;
+
+
 function crearInterfaz() {
 
 
@@ -47,8 +50,9 @@ function crearInterfaz() {
   let contenedorMarcador2 = crearContenedor("score");
 
 
-  jugador1 = crearLabel("Jugador 1:", "puntaje");
-  jugador2 = crearLabel("Jugador 2:", "puntaje");
+  jugador1 = crearLabel("Jugador 1:");
+  jugador1.classList.add("jugando")
+  jugador2 = crearLabel("Jugador 2:");
 
 
   const marcador = crearContenedor("contenedor-marcador");
@@ -112,7 +116,7 @@ function crearInterfaz() {
 function crearLabel(textContent, clase) {
 
   const label = document.createElement("label");
-  label.classList.add(clase);
+ 
 
   label.textContent = textContent;
 
@@ -138,10 +142,14 @@ function compararCartas() {
     setTimeout(() => {
 
       retirarCartas();
+
       asignarPuntos();
+
       primeraCarta = null;
+
       segundaCarta = null;
 
+      alternar = true;
 
     }, 2000)
 
@@ -151,9 +159,14 @@ function compararCartas() {
     setTimeout(() => {
 
       primeraCarta.classList.remove("mostrar");
+
       segundaCarta.classList.remove("mostrar");
+
       primeraCarta = null;
+
       segundaCarta = null;
+
+      alternar = false;
 
     }, 2000);
 
@@ -163,6 +176,7 @@ function compararCartas() {
 }
 
 function crearContenedor(clase) {
+
   const contenedor = document.createElement("div");
 
   contenedor.classList.add(clase);
@@ -181,24 +195,54 @@ function retirarCartas() {
 function asignarPuntos() {
 
   if (jugadorActual === 1) {
+
     puntosJugador1++;
+
     puntos1.textContent = puntosJugador1;
+
     console.log("puntos para el 1")
   }
   else {
     puntosJugador2++;
+
     puntos2.textContent = puntosJugador2;
+
      console.log("puntos para el 2")
   }
 
 }
+function verificarGanador (puntaje1,puntaje2) {
 
+  if (puntaje1 + puntaje2 === 10) {
+
+    if (puntaje1 > puntaje2) {
+      
+      console.log("ganador juagador 1");
+    }
+    else if (puntaje1 > puntaje2) {
+
+       console.log("ganador juagador 2");
+      
+    }
+    else{
+
+      console.log("empate");
+    }
+    
+  }
+}
 
 function alternarJugador() {
 
-  if (jugadorActual === 1) {
+
+  if (alternar === false) {
+
+    if (jugadorActual === 1  ) {
+
     jugadorActual = 2;
+
     jugador1.classList.remove("jugando");
+
     jugador2.classList.add("jugando");
 
   }
@@ -206,10 +250,12 @@ function alternarJugador() {
     jugadorActual = 1;
 
     jugador1.classList.add("jugando");
+
     jugador2.classList.remove("jugando");
   }
-
-
+    
+  }
+  
 };
 
 
@@ -224,15 +270,26 @@ tablero.addEventListener("click", (e) => {
     return;
 
   if (primeraCarta === null) {
-    primeraCarta = cartaClickeada;
-    primeraCarta.classList.toggle("mostrar");
-  } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
-    segundaCarta = cartaClickeada;
-    segundaCarta.classList.toggle("mostrar");
-    compararCartas();
-    setTimeout(() => {
-      alternarJugador();
-    },2000)
 
+    primeraCarta = cartaClickeada;
+
+    primeraCarta.classList.toggle("mostrar");
+
+  } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
+
+    segundaCarta = cartaClickeada;
+
+    segundaCarta.classList.toggle("mostrar");
+
+    compararCartas();
+
+    setTimeout(() => {
+
+      alternarJugador();
+
+      verificarGanador(puntosJugador1,puntosJugador2);
+    },2000)
   }
+
+
 });
