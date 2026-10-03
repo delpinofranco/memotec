@@ -7,7 +7,9 @@ body{
 
 }
 
-
+.jugando{
+    background-color: aquamarine;
+}
 
 .tablero{
     display: flex;
@@ -43,7 +45,7 @@ body{
 }
 
 .cartas img {
-    display: none;
+    
     width: 150px;
     height: 150px;
 }
