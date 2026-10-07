@@ -33,7 +33,9 @@ let puntos2 = 0;
 let jugador1;
 let jugador2;
 let alternar = false;
-
+let contenedorMarcador1;
+let contenedorMarcador2;
+let botonReiniciar;
 
 function crearInterfaz() {
 
@@ -42,21 +44,21 @@ function crearInterfaz() {
   tablero.classList.add("tablero");
 
 
- let botonReiniciar = document.createElement("button");
- botonReiniciar.classList.add("btn-reiniciar")
- 
+  botonReiniciar = document.createElement("button");
+  botonReiniciar.classList.add("btn-reiniciar")
 
- botonReiniciar.textContent = "Reiniciar juego";
 
-  let contenedorMarcador1 = crearContenedor("score");
+  botonReiniciar.textContent = "Reiniciar juego";
 
-  let contenedorMarcador2 = crearContenedor("score");
+  contenedorMarcador1 = crearContenedor("score");
+
+  contenedorMarcador2 = crearContenedor("score");
 
 
   jugador1 = crearLabel("Jugador 1:");
 
-  jugador1.classList.add("jugando");
- 
+  contenedorMarcador1.classList.add("jugando");
+
 
   jugador2 = crearLabel("Jugador 2:");
 
@@ -83,58 +85,45 @@ function crearInterfaz() {
   contenedorMarcador1.appendChild(puntos1);
   contenedorMarcador2.appendChild(jugador2);
   contenedorMarcador2.appendChild(puntos2);
-
-
-
-
-
-
-
-
-  function insertarImagenes() {
-
-    while (contador <= 2) {
-      contador += 1;
-      imagenes.sort(() => Math.random() - 0.5);
-      imagenes.forEach(imagen => {
-        
-        carta = document.createElement("div");
-        carta.classList.add("cartas");
-
-        let atras = document.createElement("div");
-        atras.classList.add("atras");
-        
-        let frente= crearContenedor("div");
-        frente.classList.add("frente");
-
-       
-
-        let img = document.createElement("img");  
-        img.src = imagen;
-        atras.appendChild(img);
-        carta.appendChild(frente);
-        carta.appendChild(atras);
-
-        
-        
-        tablero.appendChild(carta);
-
-
-      });
-
-    }
-
-
-
-  };
-
 }
 
+function insertarImagenes() {
 
+  while (contador <= 2) {
+    contador += 1;
+    imagenes.sort(() => Math.random() - 0.5);
+    imagenes.forEach(imagen => {
+
+      carta = document.createElement("div");
+      carta.classList.add("cartas");
+
+      let atras = document.createElement("div");
+      atras.classList.add("atras");
+
+      let frente = crearContenedor("div");
+      frente.classList.add("frente");
+
+
+
+      let img = document.createElement("img");
+      img.src = imagen;
+      atras.appendChild(img);
+      carta.appendChild(frente);
+      carta.appendChild(atras);
+      tablero.appendChild(carta);
+
+
+    });
+    
+  }
+contador = 1;
+
+
+};
 function crearLabel(textContent, clase) {
 
   const label = document.createElement("label");
- 
+
 
   label.textContent = textContent;
 
@@ -227,29 +216,29 @@ function asignarPuntos() {
 
     puntos2.textContent = puntosJugador2;
 
-     console.log("puntos para el 2")
+    console.log("puntos para el 2")
   }
 
 };
 
-function verificarGanador (puntaje1,puntaje2) {
+function verificarGanador(puntaje1, puntaje2) {
 
   if (puntaje1 + puntaje2 === 10) {
 
     if (puntaje1 > puntaje2) {
-      
+
       console.log("ganador juagador 1");
     }
     else if (puntaje1 > puntaje2) {
 
-       console.log("ganador juagador 2");
-      
+      console.log("ganador juagador 2");
+
     }
-    else{
+    else {
 
       console.log("empate");
     }
-    
+
   }
 }
 
@@ -258,25 +247,25 @@ function alternarJugador() {
 
   if (alternar === false) {
 
-    if (jugadorActual === 1  ) {
+    if (jugadorActual === 1) {
 
-    jugadorActual = 2;
+      jugadorActual = 2;
 
-    jugador1.classList.remove("jugando");
+      contenedorMarcador1.classList.remove("jugando");
 
-    jugador2.classList.add("jugando");
+      contenedorMarcador2.classList.add("jugando");
+
+    }
+    else {
+      jugadorActual = 1;
+
+      contenedorMarcador1.classList.add("jugando");
+
+      contenedorMarcador2.classList.remove("jugando");
+    }
 
   }
-  else {
-    jugadorActual = 1;
 
-    jugador1.classList.add("jugando");
-
-    jugador2.classList.remove("jugando");
-  }
-    
-  }
-  
 };
 
 
@@ -288,7 +277,7 @@ crearInterfaz();
 tablero.addEventListener("click", (e) => {
 
   const cartaClickeada = e.target.closest(".cartas");
-  
+
 
   if (!cartaClickeada)
     return;
@@ -298,11 +287,11 @@ tablero.addEventListener("click", (e) => {
     primeraCarta = cartaClickeada;
 
     primeraCarta.classList.add("girar");
-   
 
 
-    
-    
+
+
+
 
   } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
 
@@ -316,9 +305,36 @@ tablero.addEventListener("click", (e) => {
 
       alternarJugador();
 
-      verificarGanador(puntosJugador1,puntosJugador2);
-    },2000)
+      verificarGanador(puntosJugador1, puntosJugador2);
+    }, 2000)
   }
 
+
+});
+
+botonReiniciar.addEventListener("click", () => {
+
+  puntosJugador1 = 0;
+  puntosJugador2 = 0;
+
+  puntos1.textContent = puntosJugador1;
+  puntos2.textContent = puntosJugador2;
+  primeraCarta = null;
+  segundaCarta = null;
+
+  jugadorActual = 1;
+  alternar = false;
+
+ 
+if (tablero.children.length > 0 ) {
+   tablero.innerHTML = "";
+  
+}
+
+  insertarImagenes();
+
+ 
+
+  
 
 });
