@@ -42,8 +42,11 @@ function crearInterfaz() {
   tablero.classList.add("tablero");
 
 
-  const botonReiniciar = crearContenedor("btn-reiniciar");
+ let botonReiniciar = document.createElement("button");
+ botonReiniciar.classList.add("btn-reiniciar")
+ 
 
+ botonReiniciar.textContent = "Reiniciar juego";
 
   let contenedorMarcador1 = crearContenedor("score");
 
@@ -51,7 +54,10 @@ function crearInterfaz() {
 
 
   jugador1 = crearLabel("Jugador 1:");
-  jugador1.classList.add("jugando")
+
+  jugador1.classList.add("jugando");
+ 
+
   jugador2 = crearLabel("Jugador 2:");
 
 
@@ -71,11 +77,13 @@ function crearInterfaz() {
   app.appendChild(tablero);
 
   marcador.appendChild(contenedorMarcador1);
+  marcador.appendChild(botonReiniciar);
   marcador.appendChild(contenedorMarcador2);
   contenedorMarcador1.appendChild(jugador1);
   contenedorMarcador1.appendChild(puntos1);
   contenedorMarcador2.appendChild(jugador2);
   contenedorMarcador2.appendChild(puntos2);
+
 
 
 
@@ -89,18 +97,29 @@ function crearInterfaz() {
       contador += 1;
       imagenes.sort(() => Math.random() - 0.5);
       imagenes.forEach(imagen => {
-
+        
         carta = document.createElement("div");
-
         carta.classList.add("cartas");
 
-        const img = document.createElement("img");
+        let atras = document.createElement("div");
+        atras.classList.add("atras");
+        
+        let frente= crearContenedor("div");
+        frente.classList.add("frente");
 
+       
+
+        let img = document.createElement("img");  
         img.src = imagen;
+        atras.appendChild(img);
+        carta.appendChild(frente);
+        carta.appendChild(atras);
 
-        carta.appendChild(img);
-
+        
+        
         tablero.appendChild(carta);
+ 
+  
 
       });
 
@@ -182,7 +201,7 @@ function crearContenedor(clase) {
   contenedor.classList.add(clase);
 
   return contenedor;
-}
+};
 
 
 function retirarCartas() {
@@ -210,7 +229,8 @@ function asignarPuntos() {
      console.log("puntos para el 2")
   }
 
-}
+};
+
 function verificarGanador (puntaje1,puntaje2) {
 
   if (puntaje1 + puntaje2 === 10) {
@@ -260,11 +280,14 @@ function alternarJugador() {
 
 
 
+
+
 crearInterfaz();
 
 tablero.addEventListener("click", (e) => {
 
   const cartaClickeada = e.target.closest(".cartas");
+  
 
   if (!cartaClickeada)
     return;
@@ -273,13 +296,18 @@ tablero.addEventListener("click", (e) => {
 
     primeraCarta = cartaClickeada;
 
-    primeraCarta.classList.toggle("mostrar");
+    primeraCarta.classList.add("girar");
+   
+
+
+    
+    
 
   } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
 
     segundaCarta = cartaClickeada;
 
-    segundaCarta.classList.toggle("mostrar");
+    segundaCarta.classList.add("girar");
 
     compararCartas();
 

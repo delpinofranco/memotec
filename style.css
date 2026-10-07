@@ -8,50 +8,131 @@ body{
 }
 
 .jugando{
-    background-color: aquamarine;
+    background-color: rgb(74, 78, 77);
 }
 
 .tablero{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
     position: relative;
-    justify-content: center;
-    align-items: center;
+    z-index: 5;
     gap: 2rem;
-    flex-wrap: wrap;
     padding: 2rem;
     height: 900px;
     width: 1200px;
-    background-color: aqua;
+    background-color: rgb(66, 215, 245);
 }
 
 .contenedor-marcador {
     display: flex;
     justify-content: space-around;
-    height: 3rem;
-    background-color: rgb(176, 176, 187);
+    align-items: center;
+    height: 4rem;
+    background-color: rgb(15, 15, 239);
 }
 
+.contenedor-card{
+    height: 200px;
+    width: 200px;
 
+}
 
 .cartas{
+   
     display: flex;
     justify-content: center;
     align-items: center;
-   background-color: antiquewhite;
     height: 200px;
     width: 200px;
+    box-shadow: 15px 15px 10px rgba(218, 7, 7, 0.3);
+     
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s;
+
+  
+
+
+
+}
+
+ .frente, .atras {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    transition: 1s;
+}
+
+
+
+.frente {
+    background-color: rgb(167, 149, 149);
+    transform:  rotateY(0deg);
+}
+
+.atras{
+    background-color: rgb(182, 20, 20);
+    transform: rotateY(180deg);
+
+    
+}
+
+.atras img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
    
+    border-radius: 1rem;
 
 }
 
-.cartas img {
-    display: none;
-    width: 150px;
-    height: 150px;
+.girar{
+    transform: rotateY(180deg);
+    transition: 0.9000s ;
 }
 
-.cartas.mostrar img {
+.mostrar{
     display: block;
 }
 
+.score {
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+    height: 2.5rem;
+    width: 8rem;
+    background-color: rgb(116, 199, 208);
+    border-radius: 1rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    
+
+}
+
+
+
+
+.score label {
+    color: white;
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.btn-reiniciar{
+    background-color: rgb(76, 208, 76);
+    padding: 1rem;
+    border-radius: 1rem;
+    color: white;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.btn-reiniciar:hover{
+    transform: scale(1.1);
+}
 
