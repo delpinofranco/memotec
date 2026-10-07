@@ -67,7 +67,9 @@ body{
     transition: 1s;
 }
 
-
+.mostrar {
+    display: block;
+}
 
 .frente {
     background-color: rgb(167, 149, 149);
@@ -85,7 +87,6 @@ body{
     width: 160px;
     height: 160px;
     object-fit: cover;
-   
     border-radius: 1rem;
 
 }
@@ -95,9 +96,7 @@ body{
     transition: 0.9000s ;
 }
 
-.mostrar{
-    display: block;
-}
+
 
 .score {
     display: flex;

@@ -118,8 +118,7 @@ function crearInterfaz() {
         
         
         tablero.appendChild(carta);
- 
-  
+
 
       });
 
@@ -157,6 +156,7 @@ function compararCartas() {
 
 
   if (img1.src === img2.src) {
+    console.log("21");
 
     setTimeout(() => {
 
@@ -176,10 +176,11 @@ function compararCartas() {
   }
   else {
     setTimeout(() => {
+      console.log("2");
 
-      primeraCarta.classList.remove("mostrar");
+      primeraCarta.classList.remove("girar");
 
-      segundaCarta.classList.remove("mostrar");
+      segundaCarta.classList.remove("girar");
 
       primeraCarta = null;
 
