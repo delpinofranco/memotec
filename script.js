@@ -66,9 +66,9 @@ function crearInterfaz() {
 
   let marcador = crearContenedor("contenedor-marcador");
 
-  puntos1 = crearSpan();
+  puntos1 = crearSpan("puntaje");
 
-  puntos2 = crearSpan();
+  puntos2 = crearSpan("puntaje");
 
 
 
@@ -89,8 +89,9 @@ function crearInterfaz() {
 
 }
 
-function crearSpan() {
+function crearSpan(clase) {
   let puntos = document.createElement("span");
+  puntos.classList.add(clase)
   puntos.textContent = "";
   return puntos
 
@@ -244,21 +245,25 @@ function asignarPuntos() {
 
 function verificarGanador(puntaje1, puntaje2) {
 
+
+
+
   if (puntaje1 + puntaje2 === 10) {
 
     if (puntaje1 > puntaje2) {
 
-      console.log("ganador juagador 1");
+       alert("¡Ganó el Jugador 1!");
     }
     else if (puntaje1 > puntaje2) {
 
-      console.log("ganador juagador 2");
+       alert("¡Ganó el Jugador 2!");
 
     }
     else {
 
-      console.log("empate");
+       alert("¡Empate!");
     }
+    reiniciarJugo();
 
   }
 }
@@ -316,19 +321,23 @@ function reinicioDeVariables() {
   usado = false;
 };
 
+function reiniciarJugo() {
 
+  reinicioDeVariables();
 
+  if (tablero.children.length > 0) {
+    tablero.innerHTML = "";
 
-// aquí se crea la interfaz y comienza la ejecución de eventos
+  }
+  usado = false;
+  btnStart.classList.remove("btn-usado")
+  insertarImagenes();
 
-crearInterfaz();
+};
 
-tablero.addEventListener("click", (e) => {
+function verificarCartasSeleccionadasDistintas (cartaClickeada) {
 
-  const cartaClickeada = e.target.closest(".cartas");
-
-
-  if (!cartaClickeada)
+   if (!cartaClickeada)
     return;
 
   if (primeraCarta === null) {
@@ -342,6 +351,39 @@ tablero.addEventListener("click", (e) => {
     segundaCarta = cartaClickeada;
 
     segundaCarta.classList.add("girar");
+}
+
+}
+
+
+
+// aquí se crea la interfaz y comienza la ejecución de eventos
+
+crearInterfaz();
+
+tablero.addEventListener("click", (e) => {
+
+
+  if (!usado) {
+    return;
+  }
+  let cartaClickeada = e.target.closest(".cartas");
+
+verificarCartasSeleccionadasDistintas(cartaClickeada);
+  // if (!cartaClickeada)
+  //   return;
+
+  // if (primeraCarta === null) {
+
+  //   primeraCarta = cartaClickeada;
+
+  //   primeraCarta.classList.add("girar");
+
+  // } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
+
+  //   segundaCarta = cartaClickeada;
+
+  //   segundaCarta.classList.add("girar");
 
     compararCartas();
 
@@ -354,8 +396,7 @@ tablero.addEventListener("click", (e) => {
   }
 
 
-});
-
+);
 
 
 
@@ -363,15 +404,7 @@ tablero.addEventListener("click", (e) => {
 botonReiniciar.addEventListener("click", () => {
 
 
-  reinicioDeVariables();
-
-  if (tablero.children.length > 0) {
-    tablero.innerHTML = "";
-
-  }
-  usado = false;
-  btnStart.classList.remove("btn-usado")
-  insertarImagenes();
+reiniciarJugo();
 
 
 
@@ -397,3 +430,4 @@ btnStart.addEventListener("click", () => {
 
   }, 2000);
 })
+
