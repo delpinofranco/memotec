@@ -36,19 +36,21 @@ let alternar = false;
 let contenedorMarcador1;
 let contenedorMarcador2;
 let botonReiniciar;
+let btnStart;
+let usado = false;
+
+
 
 function crearInterfaz() {
 
 
-  tablero = document.createElement("div");
-  tablero.classList.add("tablero");
+  tablero = crearContenedor("tablero");
+
+  botonReiniciar = crearBtn("btn-reiniciar", "Reiniciar juego");
+
+  btnStart = crearBtn("btn-start", "comenzar");
 
 
-  botonReiniciar = document.createElement("button");
-  botonReiniciar.classList.add("btn-reiniciar")
-
-
-  botonReiniciar.textContent = "Reiniciar juego";
 
   contenedorMarcador1 = crearContenedor("score");
 
@@ -59,18 +61,15 @@ function crearInterfaz() {
 
   contenedorMarcador1.classList.add("jugando");
 
-
   jugador2 = crearLabel("Jugador 2:");
 
 
-  const marcador = crearContenedor("contenedor-marcador");
+  let marcador = crearContenedor("contenedor-marcador");
 
+  puntos1 = crearSpan();
 
-  puntos1 = document.createElement("span");
-  puntos1.textContent = "";
+  puntos2 = crearSpan();
 
-  puntos2 = document.createElement("span");
-  puntos2.textContent = "";
 
 
   insertarImagenes();
@@ -80,28 +79,39 @@ function crearInterfaz() {
 
   marcador.appendChild(contenedorMarcador1);
   marcador.appendChild(botonReiniciar);
+  marcador.appendChild(btnStart);
   marcador.appendChild(contenedorMarcador2);
   contenedorMarcador1.appendChild(jugador1);
   contenedorMarcador1.appendChild(puntos1);
   contenedorMarcador2.appendChild(jugador2);
   contenedorMarcador2.appendChild(puntos2);
+
+
+}
+
+function crearSpan() {
+  let puntos = document.createElement("span");
+  puntos.textContent = "";
+  return puntos
+
 }
 
 function insertarImagenes() {
 
   while (contador <= 2) {
+
     contador += 1;
+
     imagenes.sort(() => Math.random() - 0.5);
+
     imagenes.forEach(imagen => {
 
-      carta = document.createElement("div");
-      carta.classList.add("cartas");
+      carta = crearContenedor("cartas");
 
-      let atras = document.createElement("div");
-      atras.classList.add("atras");
+      let atras = crearContenedor("atras");
 
-      let frente = crearContenedor("div");
-      frente.classList.add("frente");
+      let frente = crearContenedor("frente");
+
 
 
 
@@ -114,13 +124,14 @@ function insertarImagenes() {
 
 
     });
-    
+
   }
-contador = 1;
+  contador = 1;
 
 
 };
-function crearLabel(textContent, clase) {
+
+function crearLabel(textContent) {
 
   const label = document.createElement("label");
 
@@ -128,24 +139,33 @@ function crearLabel(textContent, clase) {
   label.textContent = textContent;
 
   return label;
-}
-
-
-function mostrarCartas() {
-
-
-
 };
 
+function OcultarmostrarCartas(clase) {
+  for (const carta of tablero.children) {
+    console.log("ddddddd");
+    carta.classList.toggle(clase);
+  }
+};
+
+function ocultarCartas() {
+
+  for (const carta of tablero.children) {
+
+    carta.classList.add("girar");
+  }
+};
 
 function compararCartas() {
+
   const img1 = primeraCarta.querySelector("img");
+
   const img2 = segundaCarta.querySelector("img");
 
 
 
   if (img1.src === img2.src) {
-    console.log("21");
+
 
     setTimeout(() => {
 
@@ -164,8 +184,8 @@ function compararCartas() {
 
   }
   else {
+
     setTimeout(() => {
-      console.log("2");
 
       primeraCarta.classList.remove("girar");
 
@@ -182,7 +202,7 @@ function compararCartas() {
   }
 
 
-}
+};
 
 function crearContenedor(clase) {
 
@@ -193,9 +213,10 @@ function crearContenedor(clase) {
   return contenedor;
 };
 
-
 function retirarCartas() {
+
   primeraCarta.style.visibility = "hidden";
+
   segundaCarta.style.visibility = "hidden";
 
 
@@ -268,9 +289,37 @@ function alternarJugador() {
 
 };
 
+function crearBtn(clase, txtcontent) {
+
+  let boton = document.createElement("button");
+
+  boton.classList.add(clase);
+
+  boton.textContent = txtcontent;
+
+  return boton;
+};
+
+function reinicioDeVariables() {
+
+  puntosJugador1 = 0;
+  puntosJugador2 = 0;
+
+  puntos1.textContent = puntosJugador1;
+  puntos2.textContent = puntosJugador2;
+  primeraCarta = null;
+  segundaCarta = null;
+
+  jugadorActual = 1;
+  alternar = false;
+
+  usado = false;
+};
 
 
 
+
+// aquí se crea la interfaz y comienza la ejecución de eventos
 
 crearInterfaz();
 
@@ -287,11 +336,6 @@ tablero.addEventListener("click", (e) => {
     primeraCarta = cartaClickeada;
 
     primeraCarta.classList.add("girar");
-
-
-
-
-
 
   } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
 
@@ -312,29 +356,44 @@ tablero.addEventListener("click", (e) => {
 
 });
 
+
+
+
+
 botonReiniciar.addEventListener("click", () => {
 
-  puntosJugador1 = 0;
-  puntosJugador2 = 0;
 
-  puntos1.textContent = puntosJugador1;
-  puntos2.textContent = puntosJugador2;
-  primeraCarta = null;
-  segundaCarta = null;
+  reinicioDeVariables();
 
-  jugadorActual = 1;
-  alternar = false;
+  if (tablero.children.length > 0) {
+    tablero.innerHTML = "";
 
- 
-if (tablero.children.length > 0 ) {
-   tablero.innerHTML = "";
-  
-}
-
+  }
+  usado = false;
+  btnStart.classList.remove("btn-usado")
   insertarImagenes();
 
- 
 
-  
+
+
 
 });
+
+
+
+btnStart.addEventListener("click", () => {
+
+
+  if (usado) {
+    return;
+  }
+
+  usado = true;
+  btnStart.classList.add("btn-usado")
+  OcultarmostrarCartas("girar");
+
+  setTimeout(() => {
+    OcultarmostrarCartas("girar");
+
+  }, 2000);
+})

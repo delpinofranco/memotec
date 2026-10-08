@@ -2,7 +2,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(124, 123, 122);
+    background-color: rgb(77, 87, 149);
+     margin: 0;
     height: 100vh;
 
 }
@@ -11,13 +12,12 @@ body{
 .tablero{
     display: grid;
     grid-template-columns: repeat(5, auto);
-    position: relative;
-    z-index: 5;
     gap: 2rem;
     padding: 2rem;
     height: 900px;
     width: 1200px;
     background-color: rgb(66, 215, 245);
+   
 }
 
 .contenedor-marcador {
@@ -63,7 +63,7 @@ body{
 }
 
 .frente {
-    background-color: rgb(188, 118, 118);
+    background-color: rgb(98, 126, 190);
     transform:  rotateY(0deg);
 }
 
@@ -109,7 +109,8 @@ body{
     font-weight: 900;
 }
 
-.btn-reiniciar{
+.btn-reiniciar,
+.btn-start{
     background-color: rgb(76, 208, 76);
     padding: 1rem;
     border-radius: 1rem;
@@ -127,4 +128,8 @@ body{
 .jugando{
     background-color: rgb(145, 159, 155);
     transform: scale(1.2);
+}
+
+.btn-usado{
+    background-color: red;
 }
