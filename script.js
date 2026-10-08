@@ -130,9 +130,6 @@ function insertarImagenes() {
 
 };
 
-
-
-
 function crearImagen(contenedor, img) {
 
   imagen = document.createElement("img");
@@ -168,15 +165,15 @@ function ocultarCartas() {
 
 function compararCartas() {
 
-  const img1 = primeraCarta.querySelector("img");
+  const img1 = primeraCarta.querySelector(".atras img");
 
-  const img2 = segundaCarta.querySelector("img");
+  const img2 = segundaCarta.querySelector(".atras img");
 
 
 
   if (img1.src === img2.src) {
 
-
+    console.log("lo rompi");
     setTimeout(() => {
 
       retirarCartas();
@@ -263,7 +260,7 @@ function verificarGanador(puntaje1, puntaje2) {
 
       alert("¡Ganó el Jugador 1!");
     }
-    else if (puntaje1 > puntaje2) {
+    else if (puntaje1 < puntaje2) {
 
       alert("¡Ganó el Jugador 2!");
 
@@ -344,9 +341,9 @@ function reiniciarJugo() {
 
 };
 
-function verificarCartasSeleccionadasDistintas(cartaClickeada) {
+function verificarCartasSeleccionadasDistintas (cartaClickeada) {
 
-  if (!cartaClickeada)
+   if (!cartaClickeada)
     return;
 
   if (primeraCarta === null) {
@@ -360,10 +357,10 @@ function verificarCartasSeleccionadasDistintas(cartaClickeada) {
     segundaCarta = cartaClickeada;
 
     segundaCarta.classList.add("girar");
-  }
-
+     
 }
 
+}
 
 
 // aquí se crea la interfaz y comienza la ejecución de eventos
@@ -378,9 +375,8 @@ tablero.addEventListener("click", (e) => {
   }
   let cartaClickeada = e.target.closest(".cartas");
 
-  verificarCartasSeleccionadasDistintas(cartaClickeada);
-
-  compararCartas();
+ verificarCartasSeleccionadasDistintas(cartaClickeada);
+compararCartas();
 
   setTimeout(() => {
 

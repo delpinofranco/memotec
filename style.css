@@ -1,21 +1,36 @@
-body{
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
     display: flex;
     justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(195, 213, 158);
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: rgb(77, 87, 149);
-    margin: 0;
-    height: 100vh;
+    width: 95%;
+    margin: 0 auto;
+
 
 }
 
 
-.tablero{
+.tablero {
     display: grid;
-    grid-template-columns: repeat(5, auto);
-    gap: 2rem;
-    padding: 2rem;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    gap: 1rem;
+    padding: 1rem;
     height: 900px;
-    width: 1200px;
+    width: 100%;
     background-color: rgb(66, 215, 245);
 }
 
@@ -23,6 +38,8 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding: 1rem;
+    width: 100%;
     height: 4rem;
     background-color: rgb(15, 15, 239);
 }
@@ -30,7 +47,7 @@ body{
 
 
 
-.cartas{
+.cartas {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,10 +58,10 @@ body{
     transform-style: preserve-3d;
     transition: transform 0.9s;
     border-radius: 1rem;
-    
+
 }
 
-.frente, 
+.frente,
 .atras {
     position: absolute;
     height: 200px;
@@ -63,10 +80,10 @@ body{
 
 .frente {
     background-color: rgb(98, 126, 190);
-    transform:  rotateY(0deg);
+    transform: rotateY(0deg);
 }
 
-.atras{
+.atras {
     background-color: rgb(186, 151, 151);
     transform: rotateY(180deg);
 }
@@ -74,7 +91,7 @@ body{
 .atras img,
 .frente img {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -82,37 +99,39 @@ body{
     border-radius: 1rem;
 }
 
-.girar{
+.girar {
     transform: rotateY(180deg);
-    transition: 0.9000s ;
+    transition: 0.9000s;
 }
 
 
 
 .score {
     display: flex;
-    align-items: center ;
+    align-items: center;
     justify-content: center;
     height: 2.5rem;
     width: 8rem;
     background-color: rgb(116, 199, 208);
     border-radius: 1rem;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-    
+
 }
 
 
-.score label, 
+.score label,
 .puntaje {
     color: white;
     font-size: 1rem;
     font-weight: 900;
 }
-.puntaje{
+
+.puntaje {
     padding: 0.5rem;
 }
+
 .btn-reiniciar,
-.btn-start{
+.btn-start {
     background-color: rgb(76, 208, 76);
     padding: 1rem;
     border-radius: 1rem;
@@ -123,16 +142,114 @@ body{
     transition: all 0.4s;
 }
 
-.btn-reiniciar:hover, 
-.btn-start:hover{
+.btn-reiniciar:hover,
+.btn-start:hover {
     transform: scale(1.1);
 }
 
-.jugando{
+.jugando {
     background-color: rgb(62, 105, 93);
     transform: scale(1.2);
 }
 
-.btn-usado{
+.btn-usado {
     background-color: red;
+}
+
+
+@media (max-width: 1200px){
+
+       .contenedor-marcador {
+        width: 100%;
+        padding:1rem ;
+        
+    }
+    .tablero {
+        grid-template-columns: repeat(4, 1fr);
+        height: auto;
+  
+    }
+
+
+    .cartas {
+        
+        width: 8rem;
+        height: 8rem;
+        
+        
+}
+.frente,
+.atras {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+}
+@media (max-width: 768px) {
+
+    .contenedor-marcador {
+        width: 100%;
+        padding:1rem ;
+        
+    }
+    .tablero {
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        height: 500px;
+        width: 100%;
+        background-color: rgb(66, 215, 245);
+    }
+
+    .score {
+        align-items: center;
+        width: 5rem;
+    }
+
+    .score label {
+        font-size: 0.8rem;
+        width: 2rem;
+    }
+
+
+
+
+    .btn-reiniciar,
+    .btn-start {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        width: 4.5rem;
+        height: 3rem;
+        font-size: 0.8rem;
+    }
+
+    .cartas {
+        
+        width: 5rem;
+        height: 5rem;
+        
+        
+}
+.frente,
+.atras {
+    height: 5rem;
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+
+
+
 }
