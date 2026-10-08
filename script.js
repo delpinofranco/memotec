@@ -38,7 +38,7 @@ let contenedorMarcador2;
 let botonReiniciar;
 let btnStart;
 let usado = false;
-
+let imagen;
 
 
 function crearInterfaz() {
@@ -114,11 +114,9 @@ function insertarImagenes() {
       let frente = crearContenedor("frente");
 
 
+      crearImagen(frente, 'imagenes/fondo_de _carta.jpg');
+      crearImagen(atras, imagen);
 
-
-      let img = document.createElement("img");
-      img.src = imagen;
-      atras.appendChild(img);
       carta.appendChild(frente);
       carta.appendChild(atras);
       tablero.appendChild(carta);
@@ -131,6 +129,17 @@ function insertarImagenes() {
 
 
 };
+
+
+
+
+function crearImagen(contenedor, img) {
+
+  imagen = document.createElement("img");
+  imagen.src = img;
+  contenedor.appendChild(imagen);
+
+}
 
 function crearLabel(textContent) {
 
@@ -252,16 +261,16 @@ function verificarGanador(puntaje1, puntaje2) {
 
     if (puntaje1 > puntaje2) {
 
-       alert("¡Ganó el Jugador 1!");
+      alert("¡Ganó el Jugador 1!");
     }
     else if (puntaje1 > puntaje2) {
 
-       alert("¡Ganó el Jugador 2!");
+      alert("¡Ganó el Jugador 2!");
 
     }
     else {
 
-       alert("¡Empate!");
+      alert("¡Empate!");
     }
     reiniciarJugo();
 
@@ -335,9 +344,9 @@ function reiniciarJugo() {
 
 };
 
-function verificarCartasSeleccionadasDistintas (cartaClickeada) {
+function verificarCartasSeleccionadasDistintas(cartaClickeada) {
 
-   if (!cartaClickeada)
+  if (!cartaClickeada)
     return;
 
   if (primeraCarta === null) {
@@ -351,7 +360,7 @@ function verificarCartasSeleccionadasDistintas (cartaClickeada) {
     segundaCarta = cartaClickeada;
 
     segundaCarta.classList.add("girar");
-}
+  }
 
 }
 
@@ -369,31 +378,17 @@ tablero.addEventListener("click", (e) => {
   }
   let cartaClickeada = e.target.closest(".cartas");
 
-verificarCartasSeleccionadasDistintas(cartaClickeada);
-  // if (!cartaClickeada)
-  //   return;
+  verificarCartasSeleccionadasDistintas(cartaClickeada);
 
-  // if (primeraCarta === null) {
+  compararCartas();
 
-  //   primeraCarta = cartaClickeada;
+  setTimeout(() => {
 
-  //   primeraCarta.classList.add("girar");
+    alternarJugador();
 
-  // } else if (segundaCarta === null && cartaClickeada !== primeraCarta) {
-
-  //   segundaCarta = cartaClickeada;
-
-  //   segundaCarta.classList.add("girar");
-
-    compararCartas();
-
-    setTimeout(() => {
-
-      alternarJugador();
-
-      verificarGanador(puntosJugador1, puntosJugador2);
-    }, 2000)
-  }
+    verificarGanador(puntosJugador1, puntosJugador2);
+  }, 2000)
+}
 
 
 );
@@ -404,7 +399,7 @@ verificarCartasSeleccionadasDistintas(cartaClickeada);
 botonReiniciar.addEventListener("click", () => {
 
 
-reiniciarJugo();
+  reiniciarJugo();
 
 
 
