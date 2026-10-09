@@ -39,52 +39,132 @@ let botonReiniciar;
 let btnStart;
 let usado = false;
 let imagen;
-
+let contenedoReloj;
+let reloj;
+let seccionTablero;
+let cronometro = 0;
+let contenedorReglas;
+let contenedorbotonera;
+let seccionJugadores;
+let contenedorJugador1;
+let contenedorJugador2;
+let encabezado;
 
 function crearInterfaz() {
 
 
-  tablero = crearContenedor("tablero");
-
-  botonReiniciar = crearBtn("btn-reiniciar", "Reiniciar juego");
-
-  btnStart = crearBtn("btn-start", "comenzar");
 
 
 
-  contenedorMarcador1 = crearContenedor("score");
+encabezado =crearContenedor("encabezado","header");
+app.appendChild(encabezado)
+  tablero = crearContenedor("tablero","div");
 
-  contenedorMarcador2 = crearContenedor("score");
+  seccionJugadores = crearContenedor("seccion-jugadores", "seccion");
+
+  contenedorJugador1 = crearContenedor("contenedor-jugador","div");
+
+  contenedorJugador2 = crearContenedor("contenedor-jugador","div");
+
+
+
+  seccionJugadores.appendChild(contenedorJugador1);
+
+  seccionJugadores.appendChild(contenedorJugador2);
+  app.appendChild(seccionJugadores);
+
+  seccionTablero = crearContenedor("seccion-tablero", "seccion");
+
+  contenedorReglas = crearContenedor("reglas-juego", "article");
+
+  contenedorBotonera = crearContenedor("contenedor-botonera", "div");
+
+
+
+
+
+
+
+
+
+  // botonReiniciar = crearBtn("btn-reiniciar", "Reiniciar juego");
+
+  // btnStart = crearBtn("btn-start", "comenzar");
+
+  // contenedoReloj = crearContenedor("contenedor-reloj", "div");
+
+  // reloj = crearLabel();
+
+  // contenedoReloj.appendChild(reloj);
+
+
+
+
+  contenedorMarcador1 = crearContenedor("score", "div");
+
+  contenedorMarcador2 = crearContenedor("score", "div");
 
 
   jugador1 = crearLabel("Jugador 1:");
 
-  contenedorMarcador1.classList.add("jugando");
 
   jugador2 = crearLabel("Jugador 2:");
 
 
-  let marcador = crearContenedor("contenedor-marcador");
+  // let marcador = crearContenedor("contenedor-marcador", "div");
 
-  puntos1 = crearSpan("puntaje");
+  // puntos1 = crearSpan("puntaje");
 
-  puntos2 = crearSpan("puntaje");
+  // puntos2 = crearSpan("puntaje");
 
+  // let contenedorTablero;
+
+  // contenedorTablero = crearContenedor("contenedor-botonera", "div");
 
 
   insertarImagenes();
-  app.appendChild(marcador);
+  seccionTablero.appendChild(contenedorBotonera);
+  seccionTablero.appendChild(tablero);
+  seccionTablero.appendChild(contenedorReglas);
+  
+  // app.appendChild(contenedorTablero);
+  app.appendChild(seccionTablero);
+  // contenedorTablero.appendChild(marcador);
+  // contenedorTablero.appendChild(contenedoReloj);
 
-  app.appendChild(tablero);
 
-  marcador.appendChild(contenedorMarcador1);
-  marcador.appendChild(botonReiniciar);
-  marcador.appendChild(btnStart);
-  marcador.appendChild(contenedorMarcador2);
+  // marcador.appendChild(contenedorMarcador1);
+  // marcador.appendChild(botonReiniciar);
+  // marcador.appendChild(btnStart);
+  // marcador.appendChild(contenedorMarcador2);
   contenedorMarcador1.appendChild(jugador1);
   contenedorMarcador1.appendChild(puntos1);
   contenedorMarcador2.appendChild(jugador2);
   contenedorMarcador2.appendChild(puntos2);
+
+
+}
+
+
+
+
+function obtenerSegundos() {
+
+  cronometro += 1
+  reloj.textContent = cronometro;
+  if (cronometro === 6) {
+    alternarJugador();
+    cronometro = 0;
+
+  }
+  if (usado) {
+    setTimeout(obtenerSegundos, 1000);
+  }
+  else {
+    reiniciarJugo();
+  }
+
+
 
 
 }
@@ -107,11 +187,11 @@ function insertarImagenes() {
 
     imagenes.forEach(imagen => {
 
-      carta = crearContenedor("cartas");
+      carta = crearContenedor("cartas","div");
 
-      let atras = crearContenedor("atras");
+      let atras = crearContenedor("atras", "div");
 
-      let frente = crearContenedor("frente");
+      let frente = crearContenedor("frente", "div");
 
 
       crearImagen(frente, 'imagenes/fondo_de _carta.jpg');
@@ -193,6 +273,7 @@ function compararCartas() {
   else {
 
     setTimeout(() => {
+      alternarJugador();
 
       primeraCarta.classList.remove("girar");
 
@@ -211,9 +292,10 @@ function compararCartas() {
 
 };
 
-function crearContenedor(clase) {
+function crearContenedor(clase, etiqueta) {
 
-  const contenedor = document.createElement("div");
+  const contenedor = document.createElement(etiqueta);
+
 
   contenedor.classList.add(clase);
 
@@ -323,7 +405,8 @@ function reinicioDeVariables() {
 
   jugadorActual = 1;
   alternar = false;
-
+  cronometro = 0;
+  reloj.textContent = cronometro;
   usado = false;
 };
 
@@ -341,9 +424,9 @@ function reiniciarJugo() {
 
 };
 
-function verificarCartasSeleccionadasDistintas (cartaClickeada) {
+function verificarCartasSeleccionadasDistintas(cartaClickeada) {
 
-   if (!cartaClickeada)
+  if (!cartaClickeada)
     return;
 
   if (primeraCarta === null) {
@@ -357,8 +440,9 @@ function verificarCartasSeleccionadasDistintas (cartaClickeada) {
     segundaCarta = cartaClickeada;
 
     segundaCarta.classList.add("girar");
-     
-}
+    compararCartas();
+
+  }
 
 }
 
@@ -375,31 +459,21 @@ tablero.addEventListener("click", (e) => {
   }
   let cartaClickeada = e.target.closest(".cartas");
 
- verificarCartasSeleccionadasDistintas(cartaClickeada);
-compararCartas();
+  verificarCartasSeleccionadasDistintas(cartaClickeada);
+
 
   setTimeout(() => {
 
-    alternarJugador();
+
 
     verificarGanador(puntosJugador1, puntosJugador2);
   }, 2000)
 }
-
-
 );
-
-
-
 
 botonReiniciar.addEventListener("click", () => {
 
-
   reiniciarJugo();
-
-
-
-
 
 });
 
@@ -407,7 +481,7 @@ botonReiniciar.addEventListener("click", () => {
 
 btnStart.addEventListener("click", () => {
 
-
+  contenedorMarcador1.classList.add("jugando");
   if (usado) {
     return;
   }
@@ -418,7 +492,7 @@ btnStart.addEventListener("click", () => {
 
   setTimeout(() => {
     OcultarmostrarCartas("girar");
-
+    obtenerSegundos();
   }, 2000);
 })
 
