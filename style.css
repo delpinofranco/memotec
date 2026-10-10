@@ -231,15 +231,18 @@ body {
     width: auto;
     
     
+    
 }
 
 .contenedor-label-span label,
 .nombre-jugador2,
 .nombre-jugador1 {
+    display: flex;
+    white-space: nowrap;
     font-size: 1.5rem;
     font-weight: 900;
     color: #113393;
-    /* background-color: #989ba4; */
+    
 }  
 
 
