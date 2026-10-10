@@ -34,24 +34,18 @@ body {
     justify-content: center;
     width: 100%;
     min-height: 100vh;
-    background-color: red;
+    background-color: #EAF2F8;
+    margin: 0;
+    padding: 2rem;
 }
 
 .app {
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 95%;
-    margin: 0 auto;
-    gap: 0.2rem; */
     display: grid;
     grid-template-rows: repeat(3,auto);
     grid-template-areas: "encabezado" 
                             "seccion-jugadores"
                             "seccion-tablero";
     justify-content: center;
-    background-color: #f29c38;
     width: 100%;
     min-height: 100vh;
 
@@ -59,25 +53,195 @@ body {
 }
 
 .encabezado {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
     height: 8rem;
     grid-area: encabezado;
-    background-color: #63aebb;
+    background:linear-gradient(135deg, #0D204A 0%, #08152E 100%);
 }
+
+.contenedor-titulo{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: auto;
+    
+}
+
+.titulo-juego,
+.subtitulo-juego{
+    font-family:Arial, sans-serif;
+    color: white;
+}
+.titulo-juego{
+    font-size: 5rem;
+}
+.subtitulo-juego{
+    font-size: 1.5rem;
+}
+
+
+.contenedor-adorno{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 80%;
+    width: 12rem;
+    
+    
+}
+
+.cartita {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 5rem;
+    height: 6rem;
+    background-color: #4B7BEC;
+    border: 0.5rem solid white;
+    border-radius: 0.5rem;
+    transition: transform 0.3s;
+}
+
+.cartita img {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.cartita1 {
+    z-index: 1;
+    left: 5rem;
+    transform: rotate(15deg);
+}
+
+
+.cartita2 {
+    z-index: 2;
+    right: 5rem;
+    transform: rotate(-15deg);
+}
+
+.cartita2:hover,
+.cartita1:hover {
+    z-index: 2;
+    scale: 1.1;
+}
+
+
+
 .seccion-jugadores{
     grid-area: seccion-jugadores;
     display: flex;
+    justify-content: center;
     width: 100%;
-    height: auto;
-    justify-content: space-around;
-    background-color: #53250e;
+    height: 80%;
+    
+    
+    
 }
 
-.contenedor-jugador{
+.contenedor-jugador2,
+.contenedor-jugador1{
     display: flex;
-    height: 8rem;
-    background-color: #333c3c;
+    justify-content:space-around ;
+    align-items: center;
+    height: auto;
+    width: 40%;
+    background-color: #EBF3FE;
+    border-radius: 1rem;
+    border: 0.15rem rgb(56, 108, 199) solid;
+    margin: 1rem;
+    padding: 2rem;
+    
 }
+
+
+.icono-usuario {
+    width: 5rem;
+    height:5rem;;
+    border-radius: 50%;
+    background-color: #eaf4ff;  
+}
+
+
+
+.contenedor-jugador input{
+    width: 60%;
+    height: 2rem;
+    font-size: 1rem;
+    
+
+}
+
+.contenedor-puntaje{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    height: 4rem;
+    width: 8rem;
+    background-color: #5681ae;
+
+}
+
+.contenedor-puntaje p,
+.contenedor-puntaje span{
+     font-size: 2rem;
+     font-weight: 700;
+     color: white;
+}
+
+.contenedor-input-jugador{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    gap: 1rem;
+    padding: 0.5rem;
+    /* background-color: #9a9e9f; */
+}
+.btn-guardar {
+  background-color: #335aca;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  
+}
+.contenedor-input-jugador input{
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    border: 0.1rem solid blue;
+}
+
+.contenedor-label-span{
+    display: flex;
+    gap: 1rem;
+    padding: 0.4rem;
+    width: auto;
+    
+    
+}
+
+.contenedor-label-span label,
+.nombre-jugador2,
+.nombre-jugador1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #113393;
+    /* background-color: #989ba4; */
+}  
+
 
 .seccion-tablero{
     grid-area: seccion-tablero;
@@ -85,23 +249,28 @@ body {
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "contenedor-botonera tablero reglas-juego";
-    background-color: #7b9468;
+    gap: 2rem;
+    
 
 }
-
+.tablero,
+.contenedor-botonera,
+.reglas-juego{
+        border: 0.15rem rgb(56, 108, 199) solid;
+        border-radius: 1rem;
+        box-shadow: 10px -5px 10px rgba(110, 86, 86, 0.3);
+        background-color: #d7dce5;
+}
 .contenedor-botonera{
     
-    background-color: #2c546b;
     grid-area: contenedor-botonera;
-   
+
 }
 
 
 
 .reglas-juego {
     grid-area: reglas-juego;
-    
-    background-color: #f29c38;
 }
 
 
@@ -142,8 +311,8 @@ body {
     padding: 1rem;
     height: 900px;
     width: 100%;
-    background-color: rgb(69, 87, 91);
-    border-radius: 1rem ;
+    /* background-color: #d7dce5;
+    border-radius: 1rem ; */
 }
 
 .contenedor-marcador {

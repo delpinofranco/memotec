@@ -1,5 +1,6 @@
 
 
+
 const imagenes = [
   'imagenes/images.jpeg',
   'imagenes/images (2).jpeg',
@@ -47,30 +48,136 @@ let contenedorReglas;
 let contenedorbotonera;
 let seccionJugadores;
 let contenedorJugador1;
-let contenedorJugador2;
-let encabezado;
+
+
+
 
 function crearInterfaz() {
 
 
 
-
-
-encabezado =crearContenedor("encabezado","header");
-app.appendChild(encabezado)
-  tablero = crearContenedor("tablero","div");
-
-  seccionJugadores = crearContenedor("seccion-jugadores", "seccion");
-
-  contenedorJugador1 = crearContenedor("contenedor-jugador","div");
-
-  contenedorJugador2 = crearContenedor("contenedor-jugador","div");
+  let encabezado = crearContenedor("encabezado", "header");
 
 
 
+
+  tablero = crearContenedor("tablero", "div");
+  let adorno = crearContenedor("cartita", "div");
+  let adorno1 = crearContenedor("cartita", "div");
+  adorno.classList.add("cartita1");
+  adorno1.classList.add("cartita2");
+
+
+
+
+  let imagenAdorno = crearImagen(adorno, "imagenes/fondo_de _carta.jpg");
+  let imagenAdorno2 = crearImagen(adorno1, "imagenes/fondo_de _carta.jpg");
+
+  let contenedorAdorno = crearContenedor("contenedor-adorno", "div")
+  contenedorAdorno.appendChild(adorno1);
+  contenedorAdorno.appendChild(adorno);
+  encabezado.appendChild(contenedorAdorno);
+
+  let contenedorTitulo = crearContenedor("contenedor-titulo", "div");
+  let titulo = document.createElement("h1");
+  contenedorTitulo.appendChild(titulo)
+  titulo.classList.add("titulo-juego");
+  titulo.textContent = "Memotest"
+  encabezado.appendChild(contenedorTitulo)
+  app.appendChild(encabezado);
+
+  let subTitulo = document.createElement("h2");
+  subTitulo.classList.add("subtitulo-juego");
+  subTitulo.textContent = "Encontra las imagenes iguales"
+  contenedorTitulo.appendChild(subTitulo)
+
+
+
+
+  seccionJugadores = crearContenedor("seccion-jugadores", "section");
+
+  // contenedorJugador1 = crearContenedor("contenedor-jugador", "div");
+  // let nombrejugado1 = crearSpan("nombre-jugador1")
+
+
+  //sección jugador 2 
+  //contenedor del jugador 2, contiene: icono, contenedor input jugador, contenedor jugador
+
+
+  function crearJugador(numero) {
+  let contenedorJugador = crearContenedor("contenedor-jugador" + numero  , "div");
+
+    let imagenJugador = document.createElement("img");
+    imagenJugador.classList.add("icono-usuario");
+    imagenJugador.src = "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/person-circle.svg";
+
+    // contenedor que contiene : contenedor-label-span, input ingresar nombre y btn guardar 
+    let contenedorInputNombre = crearContenedor("contenedor-input-jugador", "div");
+
+    let btnGuardar = crearBtn("btn-guardar", "Guardar");
+
+    let jugadorInput = document.createElement("input");
+    jugadorInput.id = "input-jugador" + numero;
+
+    jugadorInput.placeholder = "Ingresá tu nombre";
+
+
+
+
+    // contiene el el label y el span
+    let contenedorLabelSpan = crearContenedor("contenedor-label-span", "div");
+
+    let label = crearLabel("nombre ingresado");
+
+    let nombrejugador = crearSpan("nombre-jugador" + numero, "Jugador: " + numero);
+    contenedorLabelSpan.appendChild(nombrejugador);
+    contenedorLabelSpan.appendChild(label);
+
+
+
+    // contiene: span y p
+    let contenedorPuntaje = crearContenedor("contenedor-puntaje", "div");
+
+    let puntaje = crearSpan("puntaje-jugador" + numero, "0");
+
+
+    let textoPuntaje = document.createElement("p")
+    textoPuntaje.append(" / 8");
+
+    +
+
+
+      contenedorPuntaje.appendChild(puntaje);
+    contenedorPuntaje.appendChild(textoPuntaje);
+    contenedorJugador.appendChild(imagenJugador);
+
+
+    // contine el contenedor que tiene el label y el span
+    contenedorInputNombre.appendChild(contenedorLabelSpan);
+
+    //contenedor que contiene el input
+    contenedorInputNombre.appendChild(jugadorInput);
+    contenedorInputNombre.appendChild(btnGuardar);
+
+
+    // es el contenedor principal de la informacion del jugador
+    contenedorJugador.appendChild(contenedorInputNombre);
+    contenedorJugador.appendChild(contenedorPuntaje)
+    return contenedorJugador;
+  }
+
+
+
+
+ let contenedorJugador1 = crearJugador(1);
+ let contenedorJugador2 = crearJugador(2);
+
+
+
+  // seccionJugadores.appendChild(contenedorJugador2);
   seccionJugadores.appendChild(contenedorJugador1);
-
   seccionJugadores.appendChild(contenedorJugador2);
+
   app.appendChild(seccionJugadores);
 
   seccionTablero = crearContenedor("seccion-tablero", "seccion");
@@ -78,11 +185,6 @@ app.appendChild(encabezado)
   contenedorReglas = crearContenedor("reglas-juego", "article");
 
   contenedorBotonera = crearContenedor("contenedor-botonera", "div");
-
-
-
-
-
 
 
 
@@ -100,15 +202,15 @@ app.appendChild(encabezado)
 
 
 
-  contenedorMarcador1 = crearContenedor("score", "div");
+  // contenedorMarcador1 = crearContenedor("score", "div");
 
-  contenedorMarcador2 = crearContenedor("score", "div");
-
-
-  jugador1 = crearLabel("Jugador 1:");
+  // contenedorMarcador2 = crearContenedor("score", "div");
 
 
-  jugador2 = crearLabel("Jugador 2:");
+  // jugador1 = crearLabel("Jugador 1:");
+
+
+  // jugador2 = crearLabel("Jugador 2:");
 
 
   // let marcador = crearContenedor("contenedor-marcador", "div");
@@ -126,22 +228,9 @@ app.appendChild(encabezado)
   seccionTablero.appendChild(contenedorBotonera);
   seccionTablero.appendChild(tablero);
   seccionTablero.appendChild(contenedorReglas);
-  
-  // app.appendChild(contenedorTablero);
+
+
   app.appendChild(seccionTablero);
-  // contenedorTablero.appendChild(marcador);
-  // contenedorTablero.appendChild(contenedoReloj);
-
-
-  // marcador.appendChild(contenedorMarcador1);
-  // marcador.appendChild(botonReiniciar);
-  // marcador.appendChild(btnStart);
-  // marcador.appendChild(contenedorMarcador2);
-  contenedorMarcador1.appendChild(jugador1);
-  contenedorMarcador1.appendChild(puntos1);
-  contenedorMarcador2.appendChild(jugador2);
-  contenedorMarcador2.appendChild(puntos2);
-
 
 }
 
@@ -169,11 +258,11 @@ function obtenerSegundos() {
 
 }
 
-function crearSpan(clase) {
-  let puntos = document.createElement("span");
-  puntos.classList.add(clase)
-  puntos.textContent = "";
-  return puntos
+function crearSpan(clase, content = null) {
+  let elemento = document.createElement("span");
+  elemento.classList.add(clase)
+  elemento.textContent = content;
+  return elemento
 
 }
 
@@ -187,7 +276,7 @@ function insertarImagenes() {
 
     imagenes.forEach(imagen => {
 
-      carta = crearContenedor("cartas","div");
+      carta = crearContenedor("cartas", "div");
 
       let atras = crearContenedor("atras", "div");
 
