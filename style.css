@@ -1,31 +1,34 @@
 * {
     margin: 0;
     box-sizing: border-box;
+
+
+
 }
 
 :root {
-  /* Fondo general de la página */
-  --bg-page: #7b9468;
+    /* Fondo general de la página */
+    --bg-page: #7b9468;
 
-  /* Barra superior principal (Navegación / Marcadores) */
-  --topbar-bg-dark: #224254;
-  --topbar-bg-light: #2c546b;
+    /* Barra superior principal (Navegación / Marcadores) */
+    --topbar-bg-dark: #224254;
+    --topbar-bg-light: #2c546b;
 
-  /* Modulo del contador / Cronómetro */
-  --counter-bg: #53250e;
-  --counter-number: #f29c38;
+    /* Modulo del contador / Cronómetro */
+    --counter-bg: #53250e;
+    --counter-number: #f29c38;
 
-  /* Tablero / Grilla principal */
-  --board-bg: #63aebb;
+    /* Tablero / Grilla principal */
+    --board-bg: #63aebb;
 
-  /* Tarjetas del juego (Fondo metálico / Sombras) */
-  --card-bg-start: #d3d9da;
-  --card-bg-end: #9a9e9f;
-  --card-glow: rgba(255, 230, 180, 0.4);
+    /* Tarjetas del juego (Fondo metálico / Sombras) */
+    --card-bg-start: #d3d9da;
+    --card-bg-end: #9a9e9f;
+    --card-glow: rgba(255, 230, 180, 0.4);
 
-  /* Texto y botones de la barra superior */
-  --btn-bg: #333c3c;
-  --text-gold: #e2c179;
+    /* Texto y botones de la barra superior */
+    --btn-bg: #333c3c;
+    --text-gold: #e2c179;
 }
 
 body {
@@ -36,18 +39,22 @@ body {
     min-height: 100vh;
     background-color: #EAF2F8;
     margin: 0;
-    padding: 2rem;
+    padding: 0;
+
+
 }
 
 .app {
     display: grid;
-    grid-template-rows: repeat(3,auto);
-    grid-template-areas: "encabezado" 
-                            "seccion-jugadores"
-                            "seccion-tablero";
-    justify-content: center;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: "encabezado"
+        "seccion-jugadores"
+        "seccion-tablero";
+
+    align-content: start;
     width: 100%;
     min-height: 100vh;
+    background-color: #7481a0;
 
 
 }
@@ -57,41 +64,46 @@ body {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 8rem;
+    height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     grid-area: encabezado;
-    background:linear-gradient(135deg, #0D204A 0%, #08152E 100%);
+    background: linear-gradient(135deg, #0D204A 0%, #08152E 100%);
 }
 
-.contenedor-titulo{
+.contenedor-titulo {
     display: flex;
     flex-direction: column;
     width: 50%;
     height: auto;
-    
+    padding-bottom: 3rem;
+
 }
 
 .titulo-juego,
-.subtitulo-juego{
-    font-family:Arial, sans-serif;
+.subtitulo-juego {
+    font-family: Arial, sans-serif;
     color: white;
 }
-.titulo-juego{
+
+.titulo-juego {
     font-size: 5rem;
 }
-.subtitulo-juego{
+
+.subtitulo-juego {
     font-size: 1.5rem;
 }
 
 
-.contenedor-adorno{
+.contenedor-adorno {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     height: 80%;
     width: 12rem;
-    
-    
+
+
 }
 
 .cartita {
@@ -134,70 +146,89 @@ body {
 
 
 
-.seccion-jugadores{
+.seccion-jugadores {
     grid-area: seccion-jugadores;
     display: flex;
+    position: relative;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
-    height: 80%;
-    
-    
-    
+    height: auto;
+    margin: 1rem;
+
+
+
 }
 
 .contenedor-jugador2,
-.contenedor-jugador1{
+.contenedor-jugador1 {
     display: flex;
-    justify-content:space-around ;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    justify-content: space-around;
     align-items: center;
     height: auto;
-    width: 40%;
-    background-color: #EBF3FE;
+    width: 30%;
     border-radius: 1rem;
     border: 0.15rem rgb(56, 108, 199) solid;
     margin: 1rem;
     padding: 2rem;
-    
+    background-color: #53250e;
+
+}
+
+.contenedor-jugador1 {
+    background-color: #EBF3FE;
+    z-index: 2;
+}
+
+.contenedor-jugador2 {
+    background-color: #a0b6d6;
+      z-index: 1;
 }
 
 
 .icono-usuario {
     width: 5rem;
-    height:5rem;;
+    height: 5rem;
+    ;
     border-radius: 50%;
-    background-color: #eaf4ff;  
+    background-color: #eaf4ff;
 }
 
 
 
-.contenedor-jugador input{
+.contenedor-jugador input {
     width: 60%;
     height: 2rem;
     font-size: 1rem;
-    
-
 }
 
-.contenedor-puntaje{
+
+.contenedor-puntaje {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0.5rem;
+    gap: 1rem;
     border-radius: 0.5rem;
-    height: 4rem;
-    width: 8rem;
+    height: auto;
+    width: 15rem;
     background-color: #5681ae;
 
 }
 
 .contenedor-puntaje p,
-.contenedor-puntaje span{
-     font-size: 2rem;
-     font-weight: 700;
-     color: white;
+.contenedor-puntaje span {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
 }
 
-.contenedor-input-jugador{
+.contenedor-input-jugador {
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -205,33 +236,34 @@ body {
     padding: 0.5rem;
     /* background-color: #9a9e9f; */
 }
+
 .btn-guardar {
-  background-color: #335aca;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.5rem;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  
+    background-color: #335aca;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
 }
-.contenedor-input-jugador input{
+
+.contenedor-input-jugador input {
     padding: 0.5rem;
     border-radius: 0.5rem;
     width: 100%;
     border: 0.1rem solid blue;
 }
 
-.contenedor-label-span{
+.contenedor-label-span {
     display: flex;
     gap: 1rem;
     padding: 0.4rem;
     width: auto;
-    
-    
-    
+
+
+
 }
 
 .contenedor-label-span label,
@@ -242,31 +274,61 @@ body {
     font-size: 1.5rem;
     font-weight: 900;
     color: #113393;
-    
-}  
+
+}
 
 
-.seccion-tablero{
+.seccion-tablero {
     grid-area: seccion-tablero;
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "contenedor-botonera tablero reglas-juego";
     gap: 2rem;
-    
+    margin-bottom: 2rem;
+
 
 }
+
 .tablero,
 .contenedor-botonera,
-.reglas-juego{
-        border: 0.15rem rgb(56, 108, 199) solid;
-        border-radius: 1rem;
-        box-shadow: 10px -5px 10px rgba(110, 86, 86, 0.3);
-        background-color: #d7dce5;
+.reglas-juego,
+.pantalla-versus {
+
+    border: 0.15rem rgb(56, 108, 199) solid;
+    border-radius: 1rem;
+    box-shadow: 10px -5px 10px rgba(110, 86, 86, 0.3);
+    background-color: #d7dce5;
 }
-.contenedor-botonera{
-    
+
+
+.pantalla-versus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.contador {
+    display: flex;
+}
+
+.contenedor-botonera {
     grid-area: contenedor-botonera;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+
+
+
+}
+
+.fila-superior {
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    justify-content: space-around;
 
 }
 
@@ -283,28 +345,7 @@ body {
 }
 
 
-/* .contenedor-botonera{
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    width: 100%;
-    gap: 0.2rem;
-    
-    
-}
-.contenedor-reloj{
-    display: flex;
-    justify-content: center;
-    background-color: var(--topbar-bg-light);
-    height:  3rem;
-}
 
-
-.contenedor-reloj label{
-    font-size: 2rem;
-}
-.reloj{
-    font-size: 1rem; */
 
 .tablero {
     display: grid;
@@ -314,8 +355,7 @@ body {
     padding: 1rem;
     height: 900px;
     width: 100%;
-    /* background-color: #d7dce5;
-    border-radius: 1rem ; */
+
 }
 
 .contenedor-marcador {
@@ -340,14 +380,13 @@ body {
     width: 200px;
     box-shadow: 15px 15px 10px rgba(110, 86, 86, 0.3);
     position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.9s;
     border-radius: 1rem;
     cursor: pointer;
+    transform-style: preserve-3d;
 
 }
 
-.frente:hover{
+.frente:hover {
     transform: scale(0.95);
 }
 
@@ -369,12 +408,12 @@ body {
 }
 
 .frente {
-    
+
     transform: rotateY(0deg);
 }
 
 .atras {
-    
+
     transform: rotateY(180deg);
 }
 
@@ -395,46 +434,67 @@ body {
 }
 
 
+.btn-start {
+    background-color: rgb(56, 165, 69);
+}
 
-.score {
+.contenedor-tiempo {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 2.5rem;
-    width: 8rem;
-    background-color: var(--btn-bg);
-    border-radius: 1rem;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-
+    gap: 1rem;
 }
 
-
-.score label,
-.puntaje {
-    color: var(--text-gold);
-    font-size: 1rem;
-    font-weight: 900;
+.info-tiempo {
+    display: flex;
+    gap: 1rem;
 }
 
-.puntaje {
-    padding: 0.3rem;
+.icono-reloj {
+    font-size: 5rem;
+}
+
+.label-tiempo {
+    font-size: 2rem;
+    gap: 1rem;
+}
+
+.display-reloj {
+    font-size: 2rem;
 }
 
 .btn-reiniciar,
 .btn-start {
-    background-color: var(--btn-bg);
-    color: var(--text-gold);
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 15rem;
+    height: 5rem;
+    color: white;
     padding: 1rem;
     border-radius: 1rem;
     font-weight: 900;
-    font-size: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.4s;
 }
 
+.btn-reiniciar {
+    background-color: #7693c0;
+}
+
 .btn-reiniciar:hover,
 .btn-start:hover {
-    transform: scale(1.1);
+    transform: scale(1);
+}
+
+
+.texto-faltan-datos {
+    display: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: red;
 }
 
 .jugando {
@@ -443,6 +503,25 @@ body {
 
 .btn-usado {
     background-color: red;
+}
+
+.input-error {
+    border: 0.4rem solid #e53935;
+    background-color: #e6dbdd;
+    animation: sacudir 0.3s ease-in-out;
+}
+
+.oculto-total {
+    display: none;
+}
+
+.desvanecido {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.visible {
+    opacity: 1;
 }
 
 
@@ -463,7 +542,8 @@ body {
         width: 8rem;
         height: 8rem;
     }
-  .frente,
+
+    .frente,
     .atras {
         height: 100%;
         width: 100%;
@@ -474,39 +554,233 @@ body {
 
 @media (max-width: 768px) {
 
-    .contenedor-marcador {
+    .encabezado{
+        padding: 0.5rem;
+        height: 7rem;
+    }
+
+
+    .contenedor-titulo {
+        width: auto;
+
+    }
+
+    .titulo-juego {
+        font-size: 2rem;
+    }
+
+    .subtitulo-juego {
+        font-size: 0.8rem;
+    }
+
+
+    .contenedor-adorno {
+        margin-left: 0.5rem;
+        width: 30%;
+    }
+
+    .cartita {
+        width: 4rem;
+        height: 5rem;
+    }
+
+    .cartita1 {
+
+        left: 2rem;
+
+    }
+
+
+    .cartita2 {
+        right: 2rem;
+
+    }
+
+    .reglas-juego {
+        display: none;
+    }
+
+
+    .seccion-jugadores {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #819dad;
+        height: auto;
         width: 100%;
-        padding: 1rem;
         gap: 1rem;
+       padding: 0.5rem;
+        margin: 0;
+        transition: opacity 1.2s ease-out;
+    }
+
+    .contenedor-jugador2,
+    .contenedor-jugador1 {
+        position: absolute;
+        
+        justify-content: center;
+        height: 20%;
+        width: 80%;
+        gap: 1rem;
+        transition: opacity 1.2s ease-out;
+        top: 30%;
+        left: 5%;
+    }
+
+
+    .contenedor-jugador1 {
+        z-index: 2;
+    }
+
+    .contenedor-jugador2 {
+        z-index: 1;
+    }
+
+
+    .contenedor-label-span label,
+    .nombre-jugador2,
+    .nombre-jugador1 {
+
+        font-size: 1rem;
+
+    }
+
+    .icono-usuario {
+        width: 3rem;
+        height: 3rem;
+        ;
+        border-radius: 50%;
+        background-color: #eaf4ff;
+    }
+
+
+    .contenedor-input-jugador {
+        align-items: center;
+        width: auto;
+
+
+    }
+
+    .contenedor-input-jugador input {
+        width: 100%;
+    }
+
+    .btn-guardar {
+        width: 80%;
+    }
+
+
+    .contenedor-puntaje {
+        height: 3rem;
+        width: 4rem;
+
+    }
+
+    .contenedor-puntaje p,
+    .contenedor-puntaje span {
+        font-size: 1rem;
+
+    }
+
+    .seccion-tablero {
+        display: flex;
+        
+        flex-direction: column;
+        align-items: center;
+       gap: 0.3rem;
+  
+        width: 100%;
 
     }
 
     .tablero {
         grid-template-columns: repeat(4, auto);
-        gap: 1rem;
-        padding: 0.8rem;
+        align-items: center;
+        gap: 0.5rem;
+        width: 95%;
         height: auto;
-        
-        
     }
 
-    .score {
-        display: flex;
+
+
+    .cartas {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .frente,
+    .atras {
+        height: 100%;
+        width: 100%;
+    }
+
+
+    
+    .pantalla-versus {
+        display: none;
         justify-content: center;
         align-items: center;
-        width: 7rem;
-        
+        width: 96%;
+        height: auto;
+
+        transition: opacity 1.2s ease-out;
+        border-radius: 1rem;
     }
 
+    .contenedor-puntaje {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: auto;
 
-    .score label {
-        padding: 0.3rem;
-        font-size: 0.8rem;
-        width: 4.5rem;
+
     }
 
+    .contenedor-botonera {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        gap: 1rem;
+        width: 93%;
+        height: auto;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+        transition: opacity 1.2s ease;
+        margin-bottom: 0;
+    }
 
+    .fila-superior {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        height: auto;
+        padding: 0.5rem;
+        width: 100%;
 
+    }
+
+    .contenedor-tiempo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .display-reloj,
+    .label-tiempo {
+        font-size: 1rem;
+    }
+
+    .icono-reloj {
+        font-size: 2.5rem;
+    }
+
+    .icono-start,
+    .icono-reiniciar {
+        font-size: 1.5rem;
+    }
 
     .btn-reiniciar,
     .btn-start {
@@ -519,16 +793,22 @@ body {
         font-size: 0.8rem;
     }
 
-    .cartas {
-        width: 5rem;
-        height: 5rem;
+    .btn-start {
+        justify-content: space-around;
+        width: 40%;
     }
 
-    .frente,
-    .atras {
-        height: 100%;
-        width: 100%;
+    .btn-reiniciar {
+        color: black;
+        width: 80%;
     }
+
+
+    .contador {
+        display: flex;
+    }
+
+
 
 
 
