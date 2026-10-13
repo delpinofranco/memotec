@@ -1,9 +1,6 @@
 * {
     margin: 0;
     box-sizing: border-box;
-
-
-
 }
 
 :root {
@@ -12,23 +9,7 @@
 
     /* Barra superior principal (Navegación / Marcadores) */
     --topbar-bg-dark: #224254;
-    --topbar-bg-light: #2c546b;
 
-    /* Modulo del contador / Cronómetro */
-    --counter-bg: #53250e;
-    --counter-number: #f29c38;
-
-    /* Tablero / Grilla principal */
-    --board-bg: #63aebb;
-
-    /* Tarjetas del juego (Fondo metálico / Sombras) */
-    --card-bg-start: #d3d9da;
-    --card-bg-end: #9a9e9f;
-    --card-glow: rgba(255, 230, 180, 0.4);
-
-    /* Texto y botones de la barra superior */
-    --btn-bg: #333c3c;
-    --text-gold: #e2c179;
 }
 
 body {
@@ -40,6 +21,7 @@ body {
     background-color: #EAF2F8;
     margin: 0;
     padding: 0;
+    
 
 
 }
@@ -55,9 +37,11 @@ body {
     width: 100%;
     min-height: 100vh;
     background-color: #7481a0;
+    overflow-x: hidden
 
 
 }
+
 
 .encabezado {
     display: flex;
@@ -149,24 +133,36 @@ body {
 .seccion-jugadores {
     grid-area: seccion-jugadores;
     display: flex;
-    position: relative;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 100%;
+    width: auto;
     height: auto;
     margin: 1rem;
 
-
-
 }
+
+
+
+.pantalla-modal-overlay {
+    visibility: hidden;
+    opacity: 1;
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all .4s;
+}
+
 
 .contenedor-jugador2,
 .contenedor-jugador1 {
     display: flex;
     position: absolute;
-    top: 40%;
-    left: 30%;
     justify-content: space-around;
     align-items: center;
     height: auto;
@@ -186,14 +182,14 @@ body {
 
 .contenedor-jugador2 {
     background-color: #a0b6d6;
-      z-index: 1;
+    z-index: 1;
 }
 
 
 .icono-usuario {
     width: 5rem;
     height: 5rem;
-    ;
+    
     border-radius: 50%;
     background-color: #eaf4ff;
 }
@@ -261,9 +257,6 @@ body {
     gap: 1rem;
     padding: 0.4rem;
     width: auto;
-
-
-
 }
 
 .contenedor-label-span label,
@@ -284,8 +277,9 @@ body {
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "contenedor-botonera tablero reglas-juego";
-    gap: 2rem;
+    padding: 1rem;
     margin-bottom: 2rem;
+    gap: 1rem;
 
 
 }
@@ -318,10 +312,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-
-
-
 }
 
 .fila-superior {
@@ -334,9 +324,10 @@ body {
 
 
 
-.reglas-juego {
+/* .reglas-juego {
     grid-area: reglas-juego;
-}
+    display: flex;
+} */
 
 
 
@@ -461,14 +452,15 @@ body {
 .display-reloj {
     font-size: 2rem;
 }
-
-.btn-reiniciar,
-.btn-start {
+.btn-mostrar,
+.btn-guardar,
+.btn-start,
+.btn-reiniciar {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.8rem;
     width: 15rem;
     height: 5rem;
     color: white;
@@ -478,6 +470,10 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.4s;
+    background-color: rgb(56, 165, 69);
+}
+.btn-mostrar{
+    display: none;
 }
 
 .btn-reiniciar {
@@ -524,6 +520,84 @@ body {
     opacity: 1;
 }
 
+.reglas-juego {
+    grid-area: reglas-juego;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1.5rem;
+    background-color: #f4f7fc;
+    border: 0.15rem rgb(56, 108, 199) solid;
+    border-radius: 1rem;
+    box-shadow: 10px -5px 10px rgba(110, 86, 86, 0.3);
+    gap: 1.2rem;
+    box-sizing: border-box;
+}
+
+
+.reglas-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.titulo-reglas {
+    font-family: Arial, sans-serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #113393;
+    margin: 0;
+}
+
+/* Lista de pasos */
+.lista-pasos {
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    height: auto;
+}
+
+.item-paso {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+.numero-paso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 2.3rem;
+    height: 2.3rem;
+    background-color: #cfe2ff;
+    color: #084298;
+    font-weight: bold;
+    border-radius: 50%;
+
+}
+
+.texto-paso {
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1.4;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+.btn-cerrar{
+    display: none;
+}
+
+
+
 
 @media (max-width: 1200px) {
 
@@ -554,7 +628,8 @@ body {
 
 @media (max-width: 768px) {
 
-    .encabezado{
+
+    .encabezado {
         padding: 0.5rem;
         height: 7rem;
     }
@@ -598,6 +673,20 @@ body {
 
     .reglas-juego {
         display: none;
+        position: absolute;
+        z-index: 3;
+        width: 95%;
+    }
+
+    .btn-cerrar{
+        display: flex;
+        position: absolute;
+        right: 1rem;
+        font-size: 1.5rem;
+        width: 1.5rem;
+        background: transparent;
+        font-weight: bold;
+        border: none;
     }
 
 
@@ -611,7 +700,7 @@ body {
         height: auto;
         width: 100%;
         gap: 1rem;
-       padding: 0.5rem;
+        padding: 0.5rem;
         margin: 0;
         transition: opacity 1.2s ease-out;
     }
@@ -619,7 +708,7 @@ body {
     .contenedor-jugador2,
     .contenedor-jugador1 {
         position: absolute;
-        
+
         justify-content: center;
         height: 20%;
         width: 80%;
@@ -650,7 +739,6 @@ body {
     .icono-usuario {
         width: 3rem;
         height: 3rem;
-        ;
         border-radius: 50%;
         background-color: #eaf4ff;
     }
@@ -686,19 +774,23 @@ body {
 
     .seccion-tablero {
         display: flex;
-        
         flex-direction: column;
         align-items: center;
-       gap: 0.3rem;
-  
-        width: 100%;
+        padding: 0;
+        padding-top: 0.5rem;
+        height: 100%;
+        width: auto;
+        background-color: #0D204A;
+    }
 
+    .btn-ocultar {
+        display: none;
     }
 
     .tablero {
         grid-template-columns: repeat(4, auto);
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.7rem;
         width: 95%;
         height: auto;
     }
@@ -717,25 +809,24 @@ body {
     }
 
 
-    
+
     .pantalla-versus {
         display: none;
         justify-content: center;
         align-items: center;
         width: 96%;
         height: auto;
-
+        margin-top: 0.5rem;
         transition: opacity 1.2s ease-out;
         border-radius: 1rem;
     }
+
 
     .contenedor-puntaje {
         display: flex;
         flex-direction: column;
         width: 50%;
         height: auto;
-
-
     }
 
     .contenedor-botonera {
@@ -758,9 +849,10 @@ body {
         flex-direction: row;
         height: auto;
         padding: 0.5rem;
+        background-color: #7693c0;
         width: 100%;
-
     }
+
 
     .contenedor-tiempo {
         display: flex;
@@ -770,47 +862,62 @@ body {
 
     .display-reloj,
     .label-tiempo {
-        font-size: 1rem;
+        font-size: 1.3rem;
+        font-weight: bold;
     }
 
     .icono-reloj {
         font-size: 2.5rem;
     }
-
+    .icono-mostrar,
     .icono-start,
     .icono-reiniciar {
         font-size: 1.5rem;
     }
 
-    .btn-reiniciar,
-    .btn-start {
+    .contenedor-start-reiniciar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.8rem;
+    }
+   .btn-mostrar{
+    display: flex;
+   }
+    .btn-mostrar,
+    .btn-start,
+    .btn-guardar {
+        height: 2rem;
+        width: 70%;
+        gap: 0.5rem;
+        
+        font-size: 1rem;
+    }
+
+    .btn-reiniciar {
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 1rem;
         width: 4.5rem;
         height: 3rem;
-        font-size: 0.8rem;
-    }
-
-    .btn-start {
-        justify-content: space-around;
-        width: 40%;
-    }
-
-    .btn-reiniciar {
+        font-size: 1rem;
         color: black;
         width: 80%;
     }
 
 
+   
+    /* .btn-start.btn-usado {
+    background-color: red;
+}
+.btn-mostrar.btn-reiniciar{
+    background-color: red;
+} */
+
+
     .contador {
         display: flex;
     }
-
-
-
-
-
-
 }
