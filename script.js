@@ -45,114 +45,126 @@ let contenedorbotonera;
 let seccionJugadores;
 let contenedorJugador1;
 let contenedorPalabraVs;
-let encabezado
+let encabezado;
+let validacion2;
 
+function iniciarJuego() {
 
+  usado = true;
+  cambiarEstadosBtn();
+  OcultarmostrarCartas("girar");
 
+  setTimeout(() => {
+    OcultarmostrarCartas("girar");
+    obtenerSegundos();
+  }, 2000);
+};
 
 function crearInterfaz() {
 
-    encabezado = crearContenedor("encabezado", "header");
+  encabezado = crearContenedor("encabezado", "header");
 
-    let contenedorAdorno = crearContenedor("contenedor-adorno", "div");
-    let adorno = crearContenedor("cartita", "div");
-    let adorno1 = crearContenedor("cartita", "div");
+  let contenedorAdorno = crearContenedor("contenedor-adorno", "div");
+  let adorno = crearContenedor("cartita", "div");
+  let adorno1 = crearContenedor("cartita", "div");
 
-    adorno.classList.add("cartita1");
-    adorno1.classList.add("cartita2");
+  adorno.classList.add("cartita1");
+  adorno1.classList.add("cartita2");
 
-    contenedorAdorno.appendChild(adorno1);
-    contenedorAdorno.appendChild(adorno);
-    encabezado.appendChild(contenedorAdorno);
+  contenedorAdorno.appendChild(adorno1);
+  contenedorAdorno.appendChild(adorno);
+  encabezado.appendChild(contenedorAdorno);
 
-    let pantallaModal = crearContenedor("pantalla-modal-overlay", "div", "overlay");
-    let pantallaModal2 = crearContenedor("pantalla-modal-overlay", "div", "overlay2");
+  let pantallaModal = crearContenedor("pantalla-modal-overlay", "div", "overlay");
+  let pantallaModal2 = crearContenedor("pantalla-modal-overlay", "div", "overlay2");
 
-    tablero = crearContenedor("tablero", "div");
+  tablero = crearContenedor("tablero", "div");
 
-    let imagenAdorno = crearImagen(adorno, "imagenes/fondo_de _carta.jpg");
-    let imagenAdorno2 = crearImagen(adorno1, "imagenes/fondo_de _carta.jpg");
+  let imagenAdorno = crearImagen(adorno, "imagenes/fondo_de _carta.jpg");
+  let imagenAdorno2 = crearImagen(adorno1, "imagenes/fondo_de _carta.jpg");
 
-    // let contenedorAdorno = crearContenedor("contenedor-adorno", "div");
-    // contenedorAdorno.appendChild(adorno1);
-    // contenedorAdorno.appendChild(adorno);
-    // encabezado.appendChild(contenedorAdorno);
+  // let contenedorAdorno = crearContenedor("contenedor-adorno", "div");
+  // contenedorAdorno.appendChild(adorno1);
+  // contenedorAdorno.appendChild(adorno);
+  // encabezado.appendChild(contenedorAdorno);
 
-    let contenedorTitulo = crearContenedor("contenedor-titulo", "div");
+  let contenedorTitulo = crearContenedor("contenedor-titulo", "div");
 
-    let titulo = crearTexto("titulo-juego", "h1", "Memotest", contenedorTitulo);
+  let titulo = crearTexto("titulo-juego", "h1", "Memotest", contenedorTitulo);
 
-    // let titulo = document.createElement("h1");
-    // contenedorTitulo.appendChild(titulo);
-    // titulo.classList.add("titulo-juego");"Memotest"
-    // titulo.textContent = "Memotest";
+  // let titulo = document.createElement("h1");
+  // contenedorTitulo.appendChild(titulo);
+  // titulo.classList.add("titulo-juego");"Memotest"
+  // titulo.textContent = "Memotest";
 
-    encabezado.appendChild(contenedorTitulo);
-    app.appendChild(encabezado);
+  encabezado.appendChild(contenedorTitulo);
+  app.appendChild(encabezado);
 
-    let subTitulo = crearTexto("subtitulo-juego", "h2", "Encontra las imagenes iguales", contenedorTitulo);
+  let subTitulo = crearTexto("subtitulo-juego", "h2", "Encontra las imagenes iguales", contenedorTitulo);
 
-    seccionJugadores = crearContenedor("seccion-jugadores", "section", "seccion-jugadores");
+  seccionJugadores = crearContenedor("seccion-jugadores", "section", "seccion-jugadores");
 
-    contenedorPalabraVs = crearContenedor("contenedor-palabra-vs", "div");
+  contenedorPalabraVs = crearContenedor("contenedor-palabra-vs", "div");
 
-    let palabraVs = crearTexto("texto-versus", "h1", "VS", contenedorPalabraVs);
+  let palabraVs = crearTexto("texto-versus", "h1", "VS", contenedorPalabraVs);
 
-    // let palabraVs = document.createElement("h1");
-    // palabraVs.textContent = "VS";
-    // contenedorPalabraVs.appendChild(palabraVs);
+  // let palabraVs = document.createElement("h1");
+  // palabraVs.textContent = "VS";
+  // contenedorPalabraVs.appendChild(palabraVs);
 
-    let contenedorJugador1 = crearJugador(1);
-    let contenedorJugador2 = crearJugador(2);
+  let contenedorJugador1 = crearJugador(1);
+  let contenedorJugador2 = crearJugador(2);
 
-    seccionTablero = crearContenedor("seccion-tablero", "seccion");
+  seccionTablero = crearContenedor("seccion-tablero", "seccion");
 
-    pantallaModal.appendChild(contenedorJugador1);
-    pantallaModal.appendChild(contenedorJugador2);
+  let contenedorTablero = crearContenedor("contenedor-tablero","div","contenedor-tablero");
 
-    app.appendChild(pantallaModal);
-    app.appendChild(pantallaModal2);
+  pantallaModal.appendChild(contenedorJugador1);
+  pantallaModal.appendChild(contenedorJugador2);
 
-    contenedorReglas = crearContenedor("reglas-juego", "article", "seccion-reglas");
+  app.appendChild(pantallaModal);
+  app.appendChild(pantallaModal2);
 
-    crearReglasJuego();
+  contenedorReglas = crearContenedor("reglas-juego", "article", "seccion-reglas");
 
-    pantallaModal2.appendChild(contenedorReglas);
+  crearReglasJuego();
 
-    contenedorBotonera = crearContenedor("contenedor-botonera", "div", "contenedor-botonera");
+  pantallaModal2.appendChild(contenedorReglas);
 
-    crearBotonera(contenedorBotonera);
+  contenedorBotonera = crearContenedor("contenedor-botonera", "div", "contenedor-botonera");
 
-    let pantallaVersus = crearContenedor("pantalla-versus", "div", "contenedor-pantalla-versus");
+  crearBotonera(contenedorBotonera);
 
-    let pantalla1 = crearPantallaVersus(pantallaVersus, 1, "", contenedorPalabraVs);
-    let pantalla2 = crearPantallaVersus(pantallaVersus, 2, "", contenedorPalabraVs);
+  let pantallaVersus = crearContenedor("pantalla-versus", "div", "contenedor-pantalla-versus");
 
-    seccionJugadores.appendChild(pantallaVersus);
+  let pantalla1 = crearPantallaVersus(pantallaVersus, 1, "", contenedorPalabraVs);
+  let pantalla2 = crearPantallaVersus(pantallaVersus, 2, "", contenedorPalabraVs);
 
-    app.appendChild(seccionJugadores);
+  contenedorTablero.appendChild(pantallaVersus);
 
-    insertarImagenes();
+  app.appendChild(seccionJugadores);
 
-    seccionTablero.appendChild(contenedorBotonera);
-    seccionTablero.appendChild(tablero);
-    seccionTablero.appendChild(contenedorReglas);
+  insertarImagenes();
 
-    app.appendChild(seccionTablero);
+  contenedorTablero.appendChild(tablero)
+  seccionTablero.appendChild(contenedorBotonera);
+  seccionTablero.appendChild(contenedorTablero);
+  seccionTablero.appendChild(contenedorReglas);
+
+  app.appendChild(seccionTablero);
 
 };
 
 function crearTexto(clase, etiqueta, contenido, contenedor) {
 
-    let elemento = document.createElement(etiqueta);
+  let elemento = document.createElement(etiqueta);
 
-    elemento.classList.add(clase);
+  elemento.classList.add(clase);
 
-    elemento.textContent = contenido;
-    
-    contenedor.appendChild(elemento);
-  };
+  elemento.textContent = contenido;
 
+  contenedor.appendChild(elemento);
+};
 
 function crearBotonera(contenedor) {
 
@@ -197,8 +209,7 @@ function crearBotonera(contenedor) {
   contenedor.appendChild(filaSuperior);
   contenedor.appendChild(btnConIconoReiniciar);
 
-}
-
+};
 
 function crearBtnConIcono(claseBtn, textoBtn, claseIcono, iconoContent, id) {
 
@@ -212,28 +223,23 @@ function crearBtnConIcono(claseBtn, textoBtn, claseIcono, iconoContent, id) {
   return boton;
 };
 
-
 function crearPantallaVersus(pantallaVersus, numero, inputJugador, contenedorPalabraVs) {
 
   let contenedorPuntaje = crearContenedor("contenedor-puntaje", "div", "contenedor-puntaje" + numero);
-  // contenedorPuntaje.id = "contenedor-puntaje"+numero
-  let puntaje = crearSpan("puntaje-jugador" + numero, "0");
-  puntaje.id = "puntaje" + numero;
-
-
-  let textoPuntaje = document.createElement("p");
-  textoPuntaje.textContent = " / 8";
-  textoPuntaje.classList.add("jugador" + numero);
+  
+  let puntaje = crearSpan("puntaje-jugador" + numero, "0" ,"puntaje" + numero);
+ 
 
   let contenedorNombre = crearContenedor("contenedor-nombre", "div");
 
-  let nombreJugador = crearSpan("nombre-jugador" + numero, inputJugador);
-  nombreJugador.id = "nombre-jugador" + numero;
+  let nombreJugador = crearSpan("nombre-jugador" + numero, inputJugador,"nombre-jugador" + numero);
+
 
   let sumarPuntaje = crearContenedor("contador", "div");
-
   sumarPuntaje.appendChild(puntaje);
-  sumarPuntaje.appendChild(textoPuntaje);
+ let textoPuntaje = crearTexto("jugador" + numero, "p", " / 1", sumarPuntaje);
+  
+
 
   contenedorNombre.appendChild(nombreJugador);
 
@@ -315,14 +321,14 @@ function crearReglasJuego() {
   let listaPasos = document.createElement("ul");
   listaPasos.classList.add("lista-pasos");
 
-const pasosTexto = [
+  const pasosTexto = [
     "Registrate ingresando el nombre de cada jugador.",
     "Consultá las reglas del juego.",
     "Presioná el botón Comenzar para iniciar la partida.",
     "Cada jugador tiene 16 segundos por turno.",
     "Encontrá las cartas con imágenes iguales.",
     "¡Disfrutá del juego!"
-];
+  ];
 
   pasosTexto.forEach((texto, index) => {
     let itemPaso = document.createElement("li");
@@ -345,7 +351,7 @@ const pasosTexto = [
   contenedorReglas.appendChild(listaPasos);
 
 
-}
+};
 
 function obtenerSegundos() {
 
@@ -367,12 +373,12 @@ function obtenerSegundos() {
   }
 };
 
-
-function crearSpan(clase, content = null) {
+function crearSpan(clase, content = null,id=null) {
 
   let elemento = document.createElement("span");
   elemento.classList.add(clase);
   elemento.textContent = content;
+  elemento.id = id;
 
   return elemento;
 };
@@ -489,7 +495,7 @@ function compararCartas() {
 
 function crearContenedor(clase, etiqueta, id = null) {
 
-  const contenedor = document.createElement(etiqueta);
+  let contenedor = document.createElement(etiqueta);
   contenedor.id = id
 
   contenedor.classList.add(clase);
@@ -546,7 +552,7 @@ function verificarGanador(puntaje1, puntaje2) {
     reiniciarJugo();
 
   }
-}
+};
 
 function alternarJugador() {
 
@@ -606,15 +612,21 @@ function reinicioDeVariables() {
   jugadorActual = 1;
   alternar = false;
   cronometro = 0;
+  displayReloj.textContent = cronometro;
 
   usado = false;
 
 };
+
 function mostrarRegistro() {
+
   pantallaOverlay.classList.remove("desvanecido");
+
   contenedor1.classList.remove("desvanecido");
+
   contenedor2.classList.remove("desvanecido");
-}
+};
+
 function reiniciarJugo() {
 
   reinicioDeVariables();
@@ -649,7 +661,90 @@ function verificarCartasSeleccionadasDistintas(cartaClickeada) {
 
   }
 
-}
+};
+
+function validarNombreJugador(input, nombreJugador, contenedor, texto) {
+
+  if (input.value !== "") {
+
+    nombreJugador.textContent = input.value;
+
+    contenedor.classList.toggle("desvanecido");
+
+    console.log("Clic en guardar jugador 1");
+
+    return true;
+
+
+  }
+  else {
+
+    texto.style.display = "flex";
+
+    input.classList.add("input-error");
+  }
+
+};
+
+function verificarUsado() {
+
+  if (usado) {
+
+    return true;
+  }
+
+  return false;
+};
+
+function cambiarEstadosBtn() {
+
+  if (usado) {
+
+    btnRegistrar.classList.add("btn-usado");
+
+    btnStart.classList.add("btn-usado");
+
+    btnReglas.classList.add("btn-usado");
+
+  }
+  else {
+    btnRegistrar.classList.remove("btn-usado");
+
+    btnStart.classList.remove("btn-usado");
+
+    btnReglas.classList.remove("btn-usado");
+  }
+
+
+};
+
+function enfoqueSeccion(contenedor) {
+
+  contenedor.scrollIntoView({
+
+    behavior: "smooth",
+
+    block: "start"
+  });
+
+};
+
+function iniciarJuego() {
+
+  usado = true;
+
+  cambiarEstadosBtn();
+
+  OcultarmostrarCartas("girar");
+
+  setTimeout(() => {
+
+    OcultarmostrarCartas("girar");
+
+    obtenerSegundos();
+  }, 2000);
+};
+
 
 
 // aquí se crea la interfaz y comienza la ejecución de eventos
@@ -682,69 +777,14 @@ let btnRegistrar = document.getElementById("registrar");
 let btnReglas = document.getElementById("mostrar");
 let btnCerrar = document.getElementById("cerrar");
 let seccionReglas = document.getElementById("seccion-reglas");
-let validacion2;
 
 
-function validarNombreJugador(input, nombreJugador, contenedor, texto) {
-  if (input.value !== "") {
-    nombreJugador.textContent = input.value;
-    contenedor.classList.toggle("desvanecido");
-    console.log("Clic en guardar jugador 1");
-    return true;
 
 
-  }
-  else {
-    texto.style.display = "flex";
-    input.classList.add("input-error");
-  }
-
-};
-function verificarUsado() {
-  if (usado) {
-    return true;
-  }
-
-  return false;
-};
-
-function cambiarEstadosBtn() {
-
-  if (usado) {
-    btnRegistrar.classList.add("btn-usado");
-    btnStart.classList.add("btn-usado");
-    btnReglas.classList.add("btn-usado");
-
-  }
-  else {
-    btnRegistrar.classList.remove("btn-usado");
-    btnStart.classList.remove("btn-usado");
-    btnReglas.classList.remove("btn-usado");
-  }
 
 
-};
-function enfoqueSeccion(contenedor) {
 
-  contenedor.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-
-};
-
-
-function iniciarJuego() {
-
-  usado = true;
-  cambiarEstadosBtn();
-  OcultarmostrarCartas("girar");
-
-  setTimeout(() => {
-    OcultarmostrarCartas("girar");
-    obtenerSegundos();
-  }, 2000);
-}
+// eventos de  los botoness
 
 
 tablero.addEventListener("click", (e) => {
@@ -764,26 +804,17 @@ tablero.addEventListener("click", (e) => {
 }
 );
 
-
-
-
-
-// eventos de  los botoness
-
-
-
-
 btnReiniciar.addEventListener("click", () => {
 
   reiniciarJugo();
-  
+
 
 });
 
 
 btnStart.addEventListener("click", () => {
 
-  
+
 
   if (verificarUsado()) {
     return;
@@ -795,7 +826,6 @@ btnStart.addEventListener("click", () => {
 
 });
 
-
 btnRegistrar.addEventListener("click", () => {
   if (verificarUsado()) {
     return;
@@ -804,29 +834,22 @@ btnRegistrar.addEventListener("click", () => {
   mostrarRegistro();
 });
 
-
 btnReglas.addEventListener("click", () => {
-console.log(seccionReglas.style.display);
- 
-if (seccionReglas.style.display === "" ||seccionReglas.style.display === "none" ) {
+
+  if (seccionReglas.style.display === "" || seccionReglas.style.display === "none") {
     seccionReglas.style.display = "flex";
     pantallaOverlay2.style.display = "flex";
     pantallaOverlay2.style.visibility = "visible";
-}
+  }
 
 
-})
-
+});
 
 btnCerrar.addEventListener("click", () => {
-  
-      // pantallaOverlay2.style.display = "none";
+
   seccionReglas.style.display = "none"
   pantallaOverlay2.style.visibility = "hidden"
   console.log(seccionReglas.style.display);
-
-    
-  
 
 });
 
@@ -842,13 +865,13 @@ btnGuardar2.addEventListener("click", () => {
   if (validacion2 !== true) {
     return;
   }
-  if (window.innerWidth > 768 && validacion2 === true){
+  if (window.innerWidth > 768 && validacion2 === true) {
     encabezado.style.display = "flex"
   }
-  else{
-     encabezado.style.display = "none";
+  else {
+    encabezado.style.display = "none";
   }
-  
+
   contenedorBotones.style.display = "flex";
   contenedorPantallaVersus.style.display = "flex";
   contenedorPantallaVersus.classList.add("visible");
@@ -859,23 +882,23 @@ btnGuardar2.addEventListener("click", () => {
 });
 
 window.addEventListener("resize", () => {
-  if (window.innerWidth > 768 ){
+  if (window.innerWidth > 768) {
     encabezado.style.display = "flex"
   }
-  else if(window.innerWidth <= 768 && validacion2 !== true){
-     encabezado.style.display = "flex";
+  else if (window.innerWidth <= 768 && validacion2 !== true) {
+    encabezado.style.display = "flex";
   }
-  else if(window.innerWidth <= 768 && validacion2 === true){
+  else if (window.innerWidth <= 768 && validacion2 === true) {
     encabezado.style.display = "none";
   }
 
 
-  if (window.innerWidth > 768 ){
+  if (window.innerWidth > 768) {
     seccionReglas.style.display = "flex"
   }
-  else if(window.innerWidth <= 768 ){
+  else if (window.innerWidth <= 768) {
     seccionReglas.style.display = "none"
 
   }
-  
+
 });
