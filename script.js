@@ -47,34 +47,131 @@ let contenedorJugador1;
 let contenedorPalabraVs;
 let encabezado;
 let validacion2;
+let sonidoCorrecto = crearSonido("/sonidos/correcto.mp3");
+let sonidoIncorrecto = crearSonido("/sonidos/incorrecto.mp3");
 
-function iniciarJuego() {
 
-  usado = true;
-  cambiarEstadosBtn();
-  OcultarmostrarCartas("girar");
+
+
+
+
+// function crearVentanaGanador(jugadorGanador) {
+
+//   let nombreDeJugadorGanador = crearSpan("span-ganador", `El ganador es el jugador: ${jugadorGanador}`, "span-ganador");
+//   let pantallaOverlayModalGanador = crearContenedor("pantalla-modal-overlay", "div", "overlay3");
+//   let pantallaModalGanador = crearContenedor("pantalla-ganador", "div", "modal-ganador");
+//   let infoGanador = crearContenedor("info-ganador", "div", "ganador");
+//   let tituloFinJuego = crearTexto("titulo-ganador", "h2", "Fin del juego", infoGanador);
+//   pantallaModalGanador.appendChild(nombreDeJugadorGanador);
+  
+ 
+//   let btnCerrarPantallaGanador = crearBtn("btn-cerrar-ganador","x","btn-cerrar-ganador");
+//   pantallaModalGanador.appendChild(info);
+//    pantallaModalGanador.appendChild(btnCerrarPantallaGanador);
+//  pantallaOverlayModalGanador.appendChild(pantallaModalGanador)
+//   app.appendChild(pantallaOverlayModalGanador);
+// }
+function crearVentanaGanador(jugadorGanador) {
+
+  let pantallaOverlayModalGanador = crearContenedor(
+    "pantalla-modal-overlay",
+    "div",
+    "overlay3"
+  );
+
+  let pantallaModalGanador = crearContenedor(
+    "pantalla-ganador",
+    "div",
+    "modal-ganador"
+  );
+
+  crearTexto(
+    "titulo-ganador",
+    "h2",
+    "Fin del juego",
+    pantallaModalGanador
+  );
+
+  crearTexto(
+    "span-ganador",
+    "p",
+    `El ganador es: ${jugadorGanador}`,
+    pantallaModalGanador
+  );
+
+  let contenedorBtn = crearContenedor("contenedor-btn","div","contenedor-btn");
+
+  let btnCerrarPantallaGanador = crearBtn(
+    "btn-cerrar-ganador",
+    "×",
+    "btn-cerrar-ganador"
+  );
+  pantallaOverlayModalGanador.style.visibility = "visible";
+
+  btnCerrarPantallaGanador.addEventListener("click", () => {
+    pantallaOverlayModalGanador.style.visibility = "hidden";
+  });
+
+  contenedorBtn.appendChild(btnCerrarPantallaGanador);
+  pantallaModalGanador.appendChild(contenedorBtn);
+  pantallaOverlayModalGanador.appendChild(pantallaModalGanador);
+  app.appendChild(pantallaOverlayModalGanador);
+}
+// function reiniciarJuego() {
+
+//   usado = true;
+//   cambiarEstadosBtn();
+//   OcultarmostrarCartas("girar");
+
+//   setTimeout(() => {
+//     OcultarmostrarCartas("girar");
+//     obtenerSegundos();
+//   }, 2000);
+// };
+
+function crearSonido(sonidoIndicador) {
+
+  let sonido = new Audio(sonidoIndicador);
+
+  return sonido;
+};
+
+function reporducirSonido(sonido, tiempo) {
 
   setTimeout(() => {
-    OcultarmostrarCartas("girar");
-    obtenerSegundos();
-  }, 2000);
+
+    sonido.play();
+
+  }, tiempo);
 };
 
 function crearInterfaz() {
 
+
+
+  
+
   encabezado = crearContenedor("encabezado", "header");
 
   let contenedorAdorno = crearContenedor("contenedor-adorno", "div");
+
   let adorno = crearContenedor("cartita", "div");
+
   let adorno1 = crearContenedor("cartita", "div");
 
   adorno.classList.add("cartita1");
+
   adorno1.classList.add("cartita2");
 
   contenedorAdorno.appendChild(adorno1);
+
   contenedorAdorno.appendChild(adorno);
+
   encabezado.appendChild(contenedorAdorno);
 
+
+
+ 
   let pantallaModal = crearContenedor("pantalla-modal-overlay", "div", "overlay");
   let pantallaModal2 = crearContenedor("pantalla-modal-overlay", "div", "overlay2");
 
@@ -83,21 +180,14 @@ function crearInterfaz() {
   let imagenAdorno = crearImagen(adorno, "imagenes/fondo_de _carta.jpg");
   let imagenAdorno2 = crearImagen(adorno1, "imagenes/fondo_de _carta.jpg");
 
-  // let contenedorAdorno = crearContenedor("contenedor-adorno", "div");
-  // contenedorAdorno.appendChild(adorno1);
-  // contenedorAdorno.appendChild(adorno);
-  // encabezado.appendChild(contenedorAdorno);
 
   let contenedorTitulo = crearContenedor("contenedor-titulo", "div");
 
   let titulo = crearTexto("titulo-juego", "h1", "Memotest", contenedorTitulo);
 
-  // let titulo = document.createElement("h1");
-  // contenedorTitulo.appendChild(titulo);
-  // titulo.classList.add("titulo-juego");"Memotest"
-  // titulo.textContent = "Memotest";
 
   encabezado.appendChild(contenedorTitulo);
+
   app.appendChild(encabezado);
 
   let subTitulo = crearTexto("subtitulo-juego", "h2", "Encontra las imagenes iguales", contenedorTitulo);
@@ -108,19 +198,18 @@ function crearInterfaz() {
 
   let palabraVs = crearTexto("texto-versus", "h1", "VS", contenedorPalabraVs);
 
-  // let palabraVs = document.createElement("h1");
-  // palabraVs.textContent = "VS";
-  // contenedorPalabraVs.appendChild(palabraVs);
+
 
   let contenedorJugador1 = crearJugador(1);
   let contenedorJugador2 = crearJugador(2);
 
   seccionTablero = crearContenedor("seccion-tablero", "seccion");
 
-  let contenedorTablero = crearContenedor("contenedor-tablero","div","contenedor-tablero");
+  let contenedorTablero = crearContenedor("contenedor-tablero", "div", "contenedor-tablero");
 
   pantallaModal.appendChild(contenedorJugador1);
   pantallaModal.appendChild(contenedorJugador2);
+
 
   app.appendChild(pantallaModal);
   app.appendChild(pantallaModal2);
@@ -128,6 +217,7 @@ function crearInterfaz() {
   contenedorReglas = crearContenedor("reglas-juego", "article", "seccion-reglas");
 
   crearReglasJuego();
+
 
   pantallaModal2.appendChild(contenedorReglas);
 
@@ -226,19 +316,20 @@ function crearBtnConIcono(claseBtn, textoBtn, claseIcono, iconoContent, id) {
 function crearPantallaVersus(pantallaVersus, numero, inputJugador, contenedorPalabraVs) {
 
   let contenedorPuntaje = crearContenedor("contenedor-puntaje", "div", "contenedor-puntaje" + numero);
-  
-  let puntaje = crearSpan("puntaje-jugador" + numero, "0" ,"puntaje" + numero);
- 
+
+  let puntaje = crearSpan("puntaje-jugador" + numero, "0", "puntaje" + numero);
+
 
   let contenedorNombre = crearContenedor("contenedor-nombre", "div");
 
-  let nombreJugador = crearSpan("nombre-jugador" + numero, inputJugador,"nombre-jugador" + numero);
+  let nombreJugador = crearSpan("nombre-jugador" + numero, inputJugador, "nombre-jugador" + numero);
 
 
   let sumarPuntaje = crearContenedor("contador", "div");
   sumarPuntaje.appendChild(puntaje);
- let textoPuntaje = crearTexto("jugador" + numero, "p", " / 1", sumarPuntaje);
-  
+
+  let textoPuntaje = crearTexto("jugador" + numero, "p", " / 10", sumarPuntaje);
+
 
 
   contenedorNombre.appendChild(nombreJugador);
@@ -246,6 +337,7 @@ function crearPantallaVersus(pantallaVersus, numero, inputJugador, contenedorPal
   pantallaVersus.appendChild(contenedorPalabraVs);
 
   contenedorPuntaje.appendChild(contenedorNombre);
+
   contenedorPuntaje.appendChild(sumarPuntaje);
 
   pantallaVersus.appendChild(contenedorPuntaje);
@@ -363,21 +455,25 @@ function obtenerSegundos() {
 
 
   if (cronometro === 16) {
+    console.log("supero el tiempo");
     alternarJugador();
   }
 
   if (usado) {
     setTimeout(obtenerSegundos, 1000);
   } else {
-    reiniciarJugo();
+    reiniciarJuego();
   }
 };
 
-function crearSpan(clase, content = null,id=null) {
+function crearSpan(clase, content = null, id = null) {
 
   let elemento = document.createElement("span");
+
   elemento.classList.add(clase);
+
   elemento.textContent = content;
+
   elemento.id = id;
 
   return elemento;
@@ -435,8 +531,10 @@ function crearLabel(textContent) {
 };
 
 function OcultarmostrarCartas(clase) {
+
   for (const carta of tablero.children) {
-    console.log("ddddddd");
+
+
     carta.classList.toggle(clase);
   }
 };
@@ -451,7 +549,8 @@ function compararCartas() {
 
   if (img1.src === img2.src) {
 
-    console.log("lo rompi");
+    reporducirSonido(sonidoCorrecto, 1500)
+
     setTimeout(() => {
 
       retirarCartas();
@@ -462,14 +561,16 @@ function compararCartas() {
 
       segundaCarta = null;
 
-      alternar = true;
-      cronometro = -2;
+      // alternar = true;
+      cronometro = -1;
 
-    }, 2000)
+    }, 1000)
 
 
   }
   else {
+
+    reporducirSonido(sonidoIncorrecto, 1500)
 
     setTimeout(() => {
       primeraCarta.classList.remove("girar");
@@ -483,7 +584,7 @@ function compararCartas() {
       alternar = false;
 
       alternarJugador();
-      cronometro = -2;
+      cronometro = -1;
 
 
     }, 2000);
@@ -534,22 +635,25 @@ function asignarPuntos() {
 
 function verificarGanador(puntaje1, puntaje2) {
 
+
   if (puntaje1 + puntaje2 === 10) {
-
+   
     if (puntaje1 > puntaje2) {
-
-      alert(nombrejugador1.textContent)
+      
+ 
+        crearVentanaGanador(nombrejugador1.textContent);
+    
     }
     else if (puntaje1 < puntaje2) {
 
-      alert(nombrejugador2.textContent);
+      crearVentanaGanador(nombrejugador2.textContent);
 
     }
     else {
 
-      alert("¡Empate!");
+     crearVentanaGanador("¡Empate!");
     }
-    reiniciarJugo();
+    reiniciarJuego();
 
   }
 };
@@ -567,6 +671,7 @@ function alternarJugador() {
 
       contenedorPuntaje2.classList.add("jugando");
       cronometro = 0;
+      console.log("entro aca 1")
 
     }
     else {
@@ -576,27 +681,30 @@ function alternarJugador() {
       contenedorPuntaje1.classList.add("jugando");
 
       contenedorPuntaje2.classList.remove("jugando");
+      console.log("entro aca 12")
     }
 
   }
 
 };
 
-function crearBtn(clase, txtcontent) {
+function crearBtn(clase, txtcontent,id=null) {
 
   let boton = document.createElement("button");
 
   boton.classList.add(clase);
 
   boton.textContent = txtcontent;
+  boton.id =id;
 
   return boton;
 };
 
 function reinicioDeVariables() {
 
-  contenedorPuntaje1.classList.remove("jugando");
-
+  
+quitarClaseJugando();
+  usado = false;
   puntosJugador1 = 0;
   puntosJugador2 = 0;
   inputJugador1.value = "";
@@ -605,7 +713,7 @@ function reinicioDeVariables() {
   puntuacion2.textContent = puntosJugador2;
   nombrejugador1.textContent = "";
   nombrejugador2.textContent = "";
-
+  validacion2 = false;
   primeraCarta = null;
   segundaCarta = null;
 
@@ -614,7 +722,6 @@ function reinicioDeVariables() {
   cronometro = 0;
   displayReloj.textContent = cronometro;
 
-  usado = false;
 
 };
 
@@ -627,7 +734,7 @@ function mostrarRegistro() {
   contenedor2.classList.remove("desvanecido");
 };
 
-function reiniciarJugo() {
+function reiniciarJuego() {
 
   reinicioDeVariables();
 
@@ -635,7 +742,7 @@ function reiniciarJugo() {
     tablero.innerHTML = "";
 
   }
-  usado = false;
+ 
   cambiarEstadosBtn();
   insertarImagenes();
 
@@ -745,6 +852,21 @@ function iniciarJuego() {
   }, 2000);
 };
 
+function quitarClaseJugando () {
+  console.log("entro a la funcion")
+
+  if (contenedorPuntaje1.classList.contains("jugando")) {
+    contenedorPuntaje1.classList.remove("jugando");
+    console.log("entro a la funcion 1")
+    
+  }
+  else{
+    contenedorPuntaje2.classList.remove("jugando")
+     console.log("entro a la funcion 2")
+  }
+}
+
+
 
 
 // aquí se crea la interfaz y comienza la ejecución de eventos
@@ -773,10 +895,12 @@ let puntuacion2 = document.getElementById("puntaje2");
 let displayReloj = document.getElementById("reloj");
 let pantallaOverlay = document.getElementById("overlay");
 let pantallaOverlay2 = document.getElementById("overlay2");
+let pantallaOverlay3 = document.getElementById("overlay3");
 let btnRegistrar = document.getElementById("registrar");
 let btnReglas = document.getElementById("mostrar");
 let btnCerrar = document.getElementById("cerrar");
 let seccionReglas = document.getElementById("seccion-reglas");
+// let btnCerrarGanador = document.getElementById("btn-cerrar-ganador");
 
 
 
@@ -789,9 +913,10 @@ let seccionReglas = document.getElementById("seccion-reglas");
 
 tablero.addEventListener("click", (e) => {
 
+console.log(usado)
 
-
-  let cartaClickeada = e.target.closest(".cartas");
+  if (verificarUsado()) {
+     let cartaClickeada = e.target.closest(".cartas");
   if (!cartaClickeada) {
     return;
   }
@@ -802,19 +927,25 @@ tablero.addEventListener("click", (e) => {
     verificarGanador(puntosJugador1, puntosJugador2);
   }, 2000)
 }
+  }
+
+
 );
 
 btnReiniciar.addEventListener("click", () => {
 
-  reiniciarJugo();
+  if (verificarUsado()) {
+    reiniciarJuego();
+  }
+  
 
 
 });
 
 
 btnStart.addEventListener("click", () => {
-
-
+console.log(verificarUsado())
+console.log(usado)
 
   if (verificarUsado()) {
     return;
@@ -827,15 +958,20 @@ btnStart.addEventListener("click", () => {
 });
 
 btnRegistrar.addEventListener("click", () => {
+  console.log(verificarUsado())
   if (verificarUsado()) {
     return;
   };
   pantallaOverlay.style.visibility = "visible"
   mostrarRegistro();
+ 
 });
 
 btnReglas.addEventListener("click", () => {
-
+  console.log(verificarUsado())
+  if (verificarUsado()) {
+    return;
+  }
   if (seccionReglas.style.display === "" || seccionReglas.style.display === "none") {
     seccionReglas.style.display = "flex";
     pantallaOverlay2.style.display = "flex";
@@ -852,6 +988,12 @@ btnCerrar.addEventListener("click", () => {
   console.log(seccionReglas.style.display);
 
 });
+
+
+// btnCerrarGanador.addEventListener("click", () => {
+//   console.log( pantallaOverlay3.style.visibility)
+//    pantallaOverlay3.style.visibility = "hidden"
+// })
 
 btnGuardar1.addEventListener("click", () => {
   validarNombreJugador(inputJugador1, nombrejugador1, contenedor1, textoFaltanDatos1);
